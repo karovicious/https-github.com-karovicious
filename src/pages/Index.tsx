@@ -257,8 +257,8 @@ const Index = () => {
           </div>
         </DialogContent>
       </Dialog>
-
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-red-950/30 to-rose-900/40 relative overflow-hidden">
+  return (
+    <div className="min-h-screen bg-slate-900 text-white relative overflow-hidden">
       {/* Animated background elements */}
       <div className="absolute inset-0 opacity-30">
         <div className="absolute top-20 left-10 w-16 h-16 sm:w-32 sm:h-32 bg-red-600/20 rounded-full blur-3xl animate-pulse-glow"></div>
@@ -314,10 +314,10 @@ const Index = () => {
         </div>
       </header>
 
-      <main className="container mx-auto px-2 sm:px-4 py-4 sm:py-8 bg-background/95 backdrop-blur-sm">
+      <main className="container mx-auto px-2 sm:px-4 py-4 sm:py-8 bg-slate-800/50 backdrop-blur-sm rounded-lg shadow-xl border border-slate-700">
         {/* Hero Section */}
         <section className="text-center mb-8 sm:mb-16 relative z-10">
-          <div className="max-w-4xl mx-auto animate-fade-in bg-background/80 p-6 rounded-lg shadow-lg">
+          <div className="max-w-4xl mx-auto animate-fade-in bg-slate-800/70 p-6 rounded-lg shadow-lg border border-slate-600">
             <div className="mb-6 sm:mb-8">
               <h2 className="text-3xl sm:text-5xl md:text-7xl font-bold mb-4 bg-gradient-to-r from-rose-400 via-red-400 to-rose-300 bg-clip-text text-transparent animate-pulse-glow">
                 karoVicious Toluca

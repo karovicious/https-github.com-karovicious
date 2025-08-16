@@ -23,7 +23,6 @@ import {
   Sparkles,
   Download
 } from "lucide-react";
-import { useEffect, useState } from "react";
 import type { User, Session } from "@supabase/supabase-js";
 import Logo from "@/components/ui/Logo";
 

@@ -23,6 +23,7 @@ import {
   Sparkles,
   Download
 } from "lucide-react";
+import { useEffect, useState } from "react";
 import type { User, Session } from "@supabase/supabase-js";
 import Logo from "@/components/ui/Logo";
 
@@ -31,7 +32,37 @@ const Index = () => {
   const [session, setSession] = useState<Session | null>(null);
   const [loading, setLoading] = useState(true);
   const [showWelcomeModal, setShowWelcomeModal] = useState(false);
+  const [isAppInstalled, setIsAppInstalled] = useState<boolean | null>(null);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    // Verificar si estamos en un dispositivo móvil
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    
+    if (isMobile) {
+      // Intentar detectar si la aplicación está instalada
+      // Esta es una técnica común para Android
+      const checkAppInstalled = () => {
+        const isInstalled = localStorage.getItem('appInstalled') === 'true' || 
+                          document.referrer.includes('android-app://') ||
+                          window.matchMedia('(display-mode: standalone)').matches;
+        
+        setIsAppInstalled(isInstalled);
+        
+        // Si no está instalado, agregar un listener para detectar cuando se instale
+        if (!isInstalled) {
+          window.addEventListener('appinstalled', () => {
+            localStorage.setItem('appInstalled', 'true');
+            setIsAppInstalled(true);
+          });
+        }
+      };
+      
+      checkAppInstalled();
+    } else {
+      setIsAppInstalled(false);
+    }
+  }, []);
 
   useEffect(() => {
     // Check if user has seen welcome modal
@@ -268,6 +299,16 @@ const Index = () => {
                 >
                   Registrarse
                 </Button>
+                {isAppInstalled === false && (
+                  <a 
+                    href="https://github.com/karovicious/karovicious/releases/download/untagged-be3aa0c534287476797c/app-release.apk"
+                    download="KaroVicious.apk"
+                    className="ml-2 inline-flex items-center justify-center rounded-md bg-green-600 px-3 sm:px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-green-700 hover:scale-105 transition-transform"
+                  >
+                    <Download className="h-4 w-4 mr-2" />
+                    <span className="hidden sm:inline">Descargar App</span>
+                  </a>
+                )}
               </div>
             )}
           </div>

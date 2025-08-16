@@ -15,3 +15,22 @@ export const supabase = createClient<Database>(SUPABASE_URL, SUPABASE_PUBLISHABL
     autoRefreshToken: true,
   }
 });
+
+// Helper function for auth with correct redirect
+export const signInWithRedirect = async (email: string, password: string) => {
+  return await supabase.auth.signInWithPassword({
+    email,
+    password,
+  });
+};
+
+export const signUpWithRedirect = async (email: string, password: string, options?: Record<string, unknown>) => {
+  return await supabase.auth.signUp({
+    email,
+    password,
+    options: {
+      ...options,
+      emailRedirectTo: `${window.location.origin}/auth/callback`,
+    }
+  });
+};

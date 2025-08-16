@@ -386,16 +386,16 @@ const Index = () => {
                 </p>
                 <ul className="text-sm space-y-2 text-left">
                   <li className="flex items-center">
-                    <CheckCircle className="h-4 w-4 text-green-500 mr-2" />
-                    <span>Un solo código QR para ambos</span>
+                    <CheckCircle className="h-4 w-4 text-green-400 mr-2" />
+                    <span className="text-white">Un solo código QR para ambos</span>
                   </li>
                   <li className="flex items-center">
-                    <CheckCircle className="h-4 w-4 text-green-500 mr-2" />
-                    <span>Acceso simultáneo</span>
+                    <CheckCircle className="h-4 w-4 text-green-400 mr-2" />
+                    <span className="text-white">Acceso simultáneo</span>
                   </li>
                   <li className="flex items-center">
-                    <CheckCircle className="h-4 w-4 text-green-500 mr-2" />
-                    <span>Datos de ambas personas requeridos</span>
+                    <CheckCircle className="h-4 w-4 text-green-400 mr-2" />
+                    <span className="text-white">Datos de ambas personas requeridos</span>
                   </li>
                 </ul>
               </CardContent>
@@ -414,16 +414,16 @@ const Index = () => {
                 </p>
                 <ul className="text-sm space-y-2 text-left">
                   <li className="flex items-center">
-                    <CheckCircle className="h-4 w-4 text-green-500 mr-2" />
-                    <span>Código QR individual</span>
+                    <CheckCircle className="h-4 w-4 text-green-400 mr-2" />
+                    <span className="text-white">Código QR individual</span>
                   </li>
                   <li className="flex items-center">
-                    <CheckCircle className="h-4 w-4 text-green-500 mr-2" />
-                    <span>Acceso personal único</span>
+                    <CheckCircle className="h-4 w-4 text-green-400 mr-2" />
+                    <span className="text-white">Acceso personal único</span>
                   </li>
                   <li className="flex items-center">
-                    <CheckCircle className="h-4 w-4 text-green-500 mr-2" />
-                    <span>Solo tus datos personales</span>
+                    <CheckCircle className="h-4 w-4 text-green-400 mr-2" />
+                    <span className="text-white">Solo tus datos personales</span>
                   </li>
                 </ul>
               </CardContent>
@@ -477,33 +477,33 @@ const Index = () => {
         </section>
 
         {/* Payment & Security Section */}
-        <section className="mb-8 sm:mb-16 px-4">
+        <section className="mb-8 sm:mb-16 px-4 bg-gradient-to-br from-purple-900/60 to-rose-900/60 backdrop-blur-sm p-6 rounded-lg shadow-xl border border-rose-400/30">
           <div className="grid lg:grid-cols-2 gap-4 sm:gap-8">
             {/* Payment Methods */}
-            <Card className="border-primary/20 hover:scale-105 transition-transform duration-300 animate-fade-in delay-200">
+            <Card className="border-rose-400/30 bg-gradient-to-br from-purple-800/40 to-rose-800/40 backdrop-blur-sm hover:scale-105 transition-transform duration-300 animate-fade-in delay-200 hover:shadow-lg hover:shadow-rose-500/25">
               <CardHeader className="p-4 sm:p-6">
-                <CardTitle className="flex items-center text-lg sm:text-xl">
-                  <Mail className="h-5 w-5 sm:h-6 sm:w-6 text-primary mr-2 animate-pulse" />
+                <CardTitle className="flex items-center text-lg sm:text-xl text-white">
+                  <Mail className="h-5 w-5 sm:h-6 sm:w-6 text-rose-300 mr-2 animate-pulse" />
                   Métodos de Pago
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="space-y-3">
-                  <div className="p-3 bg-muted/50 rounded-lg">
-                    <h5 className="font-semibold mb-1">💳 Pago en Efectivo</h5>
-                    <p className="text-sm text-muted-foreground">
+                  <div className="p-3 bg-black/30 border border-rose-400/20 rounded-lg">
+                    <h5 className="font-semibold mb-1 text-white">💳 Pago en Efectivo</h5>
+                    <p className="text-sm text-rose-100">
                       Pago directo en la recepción del club al momento del evento
                     </p>
                   </div>
-                  <div className="p-3 bg-muted/50 rounded-lg">
-                    <h5 className="font-semibold mb-1">📱 Transferencia Bancaria</h5>
-                    <p className="text-sm text-muted-foreground">
+                  <div className="p-3 bg-black/30 border border-rose-400/20 rounded-lg">
+                    <h5 className="font-semibold mb-1 text-white">📱 Transferencia Bancaria</h5>
+                    <p className="text-sm text-rose-100">
                       Comprobante de pago requerido al registrarse
                     </p>
                   </div>
-                  <div className="p-3 bg-muted/50 rounded-lg">
-                    <h5 className="font-semibold mb-1">🎫 Eventos Gratuitos</h5>
-                    <p className="text-sm text-muted-foreground">
+                  <div className="p-3 bg-black/30 border border-rose-400/20 rounded-lg">
+                    <h5 className="font-semibold mb-1 text-white">🎫 Eventos Gratuitos</h5>
+                    <p className="text-sm text-rose-100">
                       Solo requieren registro previo con código QR
                     </p>
                   </div>
@@ -512,31 +512,31 @@ const Index = () => {
             </Card>
 
             {/* Security */}
-            <Card className="border-primary/20 hover:scale-105 transition-transform duration-300 animate-fade-in delay-400">
+            <Card className="border-rose-400/30 bg-gradient-to-br from-purple-800/40 to-rose-800/40 backdrop-blur-sm hover:scale-105 transition-transform duration-300 animate-fade-in delay-400 hover:shadow-lg hover:shadow-rose-500/25">
               <CardHeader className="p-4 sm:p-6">
-                <CardTitle className="flex items-center text-lg sm:text-xl">
-                  <Shield className="h-5 w-5 sm:h-6 sm:w-6 text-primary mr-2 animate-pulse" />
+                <CardTitle className="flex items-center text-lg sm:text-xl text-white">
+                  <Shield className="h-5 w-5 sm:h-6 sm:w-6 text-purple-300 mr-2 animate-pulse" />
                   Seguridad y Privacidad
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="space-y-3">
-                  <div className="p-3 bg-muted/50 rounded-lg">
-                    <h5 className="font-semibold mb-1">🔒 Datos Protegidos</h5>
-                    <p className="text-sm text-muted-foreground">
+                  <div className="p-3 bg-black/30 border border-rose-400/20 rounded-lg">
+                    <h5 className="font-semibold mb-1 text-white">🔒 Datos Protegidos</h5>
+                    <p className="text-sm text-rose-100">
                       Información personal encriptada y protegida
                     </p>
                   </div>
-                  <div className="p-3 bg-muted/50 rounded-lg">
-                    <h5 className="font-semibold mb-1">🆔 Códigos QR Únicos</h5>
-                    <p className="text-sm text-muted-foreground">
+                  <div className="p-3 bg-black/30 border border-rose-400/20 rounded-lg">
+                    <h5 className="font-semibold mb-1 text-white">🆔 Códigos QR Únicos</h5>
+                    <p className="text-sm text-rose-100">
                       Generación única por evento, imposible de duplicar
                     </p>
                   </div>
-                  <div className="p-3 bg-muted/50 rounded-lg">
-                    <h5 className="font-semibold mb-1">📊 Acceso Controlado</h5>
-                    <p className="text-sm text-muted-foreground">
-                      Solo personal autorizado puede escanear códigos QR
+                  <div className="p-3 bg-black/30 border border-rose-400/20 rounded-lg">
+                    <h5 className="font-semibold mb-1 text-white">🔐 Acceso Controlado</h5>
+                    <p className="text-sm text-rose-100">
+                      Solo personal autorizado puede acceder códigos QR
                     </p>
                   </div>
                 </div>

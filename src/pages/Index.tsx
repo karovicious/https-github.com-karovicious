@@ -262,27 +262,22 @@ const Index = () => {
                 <Button variant="outline" onClick={() => navigate("/login")} className="hover:scale-105 transition-transform text-sm px-3 sm:px-4">
                   Iniciar Sesión
                 </Button>
-                <Button onClick={() => navigate("/login")} className="hover:scale-105 transition-transform text-sm px-3 sm:px-4">
+                <Button 
+                  onClick={() => navigate("/login")} 
+                  className="hover:scale-105 transition-transform text-sm px-3 sm:px-4 bg-primary text-primary-foreground hover:bg-primary/90"
+                >
                   Registrarse
                 </Button>
-                <a 
-                  href="https://github.com/karovicious/karovicious/releases/download/untagged-be3aa0c534287476797c/app-release.apk"
-                  download
-                  className="ml-2 inline-flex items-center justify-center rounded-md bg-green-600 px-3 sm:px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-green-700 hover:scale-105 transition-transform"
-                >
-                  <Download className="h-4 w-4 mr-2" />
-                  <span className="hidden sm:inline">Descargar App</span>
-                </a>
               </div>
             )}
           </div>
         </div>
       </header>
 
-      <main className="container mx-auto px-2 sm:px-4 py-4 sm:py-8">
+      <main className="container mx-auto px-2 sm:px-4 py-4 sm:py-8 bg-background/95 backdrop-blur-sm">
         {/* Hero Section */}
         <section className="text-center mb-8 sm:mb-16 relative z-10">
-          <div className="max-w-4xl mx-auto animate-fade-in">
+          <div className="max-w-4xl mx-auto animate-fade-in bg-background/80 p-6 rounded-lg shadow-lg">
             <div className="mb-6 sm:mb-8">
               <h2 className="text-3xl sm:text-5xl md:text-7xl font-bold mb-4 bg-gradient-to-r from-rose-400 via-red-400 to-rose-300 bg-clip-text text-transparent animate-pulse-glow">
                 karoVicious Toluca

@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Karo Vicious</string>
+    <string name="title_activity_main">Karo Vicious</string>
+    <string name="package_name">com.karovicious.app</string>
+    <string name="custom_url_scheme">com.karovicious.app</string>
+</resources>

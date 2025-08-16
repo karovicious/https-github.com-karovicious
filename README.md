@@ -1,4 +1,24 @@
-# Welcome to your KarolVicious project
+# Karo Vicious Reservations
+
+![Karo Vicious Logo](public/karologo_400x400.jpg)
+
+Sistema de reservas para Karo Vicious - © 2025 Todos los derechos reservados.
+
+## 📱 Descarga la Aplicación Móvil
+
+### Instalación en Android
+1. Descarga el archivo APK desde [última versión](https://github.com/tu-usuario/karo-vicous-reservations/releases/latest)
+2. En tu dispositivo Android, ve a **Ajustes > Seguridad**
+3. Habilita **Orígenes desconocidos**
+4. Abre el archivo APK descargado y sigue las instrucciones de instalación
+
+## 📝 Licencia
+
+Este proyecto está bajo la Licencia MIT - ver el archivo [LICENSE](LICENSE) para más detalles.
+
+## 📄 Derechos de Autor
+
+Copyright © 2025 Karo Vicious Reservations. Todos los derechos reservados.
 
 ## Project info
 

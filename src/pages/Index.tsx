@@ -129,10 +129,8 @@ const Index = () => {
     );
   }
 
-  return (
-    <>
-      {/* Welcome Modal */}
-      <Dialog open={showWelcomeModal} onOpenChange={setShowWelcomeModal}>
+  const WelcomeModal = () => (
+    <Dialog open={showWelcomeModal} onOpenChange={setShowWelcomeModal}>
         <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto bg-slate-900/95 border-rose-500/30 text-rose-100">
           <DialogHeader className="text-center">
             <div className="flex flex-col items-center justify-center mb-6">
@@ -256,9 +254,13 @@ const Index = () => {
             </Button>
           </div>
         </DialogContent>
-      </Dialog>
+    </Dialog>
+  );
+
   return (
-    <div className="min-h-screen bg-slate-900 text-white relative overflow-hidden">
+    <>
+      <WelcomeModal />
+      <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100 text-gray-900 relative overflow-hidden">
       {/* Animated background elements */}
       <div className="absolute inset-0 opacity-30">
         <div className="absolute top-20 left-10 w-16 h-16 sm:w-32 sm:h-32 bg-red-600/20 rounded-full blur-3xl animate-pulse-glow"></div>
@@ -268,7 +270,7 @@ const Index = () => {
         <div className="absolute bottom-40 right-1/4 w-12 h-12 sm:w-24 sm:h-24 bg-red-800/10 rounded-full blur-2xl animate-float delay-1000"></div>
       </div>
       {/* Header */}
-      <header className="border-b border-rose-500/20 bg-slate-900/95 backdrop-blur-sm sticky top-0 z-50 animate-fade-in">
+      <header className="border-b border-gray-200 bg-white/95 backdrop-blur-sm sticky top-0 z-50 animate-fade-in shadow-sm">
         <div className="container mx-auto px-2 sm:px-4 py-3 sm:py-4">
           <div className="flex items-center justify-between">
             <Logo size="md" className="hover:scale-105 transition-transform duration-300" />
@@ -314,10 +316,10 @@ const Index = () => {
         </div>
       </header>
 
-      <main className="container mx-auto px-2 sm:px-4 py-4 sm:py-8 bg-slate-800/50 backdrop-blur-sm rounded-lg shadow-xl border border-slate-700">
+      <main className="container mx-auto px-2 sm:px-4 py-4 sm:py-8 bg-white/80 backdrop-blur-sm rounded-lg shadow-lg border border-gray-200 mt-4">
         {/* Hero Section */}
         <section className="text-center mb-8 sm:mb-16 relative z-10">
-          <div className="max-w-4xl mx-auto animate-fade-in bg-slate-800/70 p-6 rounded-lg shadow-lg border border-slate-600">
+          <div className="max-w-4xl mx-auto animate-fade-in bg-white p-6 rounded-lg shadow-lg border border-gray-200">
             <div className="mb-6 sm:mb-8">
               <h2 className="text-3xl sm:text-5xl md:text-7xl font-bold mb-4 bg-gradient-to-r from-rose-400 via-red-400 to-rose-300 bg-clip-text text-transparent animate-pulse-glow">
                 karoVicious Toluca
@@ -326,21 +328,21 @@ const Index = () => {
               <div className="w-16 sm:w-24 h-1 bg-gradient-to-r from-rose-400 to-red-400 mx-auto rounded-full mb-4 sm:mb-6 animate-fade-in delay-300"></div>
             </div>
             
-            <h3 className="text-xl sm:text-3xl md:text-4xl font-bold mb-4 sm:mb-6 text-foreground animate-fade-in delay-400">
+            <h3 className="text-xl sm:text-3xl md:text-4xl font-bold mb-4 sm:mb-6 text-gray-900 animate-fade-in delay-400">
               Sistema de Gestión de Eventos
             </h3>
-            <p className="text-base sm:text-xl text-muted-foreground mb-6 sm:mb-8 max-w-3xl mx-auto leading-relaxed animate-fade-in delay-500">
+            <p className="text-base sm:text-xl text-gray-600 mb-6 sm:mb-8 max-w-3xl mx-auto leading-relaxed animate-fade-in delay-500">
               Plataforma exclusiva para la gestión y control de acceso a eventos del club.
               Reserva tu lugar como pareja o single, confirma tu asistencia y accede con códigos QR únicos y seguros.
             </p>
             
             {/* Club Location */}
-            <div className="bg-slate-800/50 backdrop-blur-sm border border-rose-500/30 rounded-xl p-4 sm:p-6 mb-6 sm:mb-8 max-w-2xl mx-auto shadow-lg shadow-rose-500/20 animate-fade-in delay-600 hover:scale-105 transition-transform duration-300">
+            <div className="bg-gray-50 border border-gray-200 rounded-xl p-4 sm:p-6 mb-6 sm:mb-8 max-w-2xl mx-auto shadow-lg animate-fade-in delay-600 hover:scale-105 transition-transform duration-300">
               <div className="flex items-center justify-center mb-4">
-                <MapPin className="h-5 w-5 sm:h-6 sm:w-6 text-rose-400 mr-2 animate-pulse" />
-                <h4 className="text-base sm:text-lg font-semibold text-rose-100">Ubicación del Club</h4>
+                <MapPin className="h-5 w-5 sm:h-6 sm:w-6 text-rose-600 mr-2 animate-pulse" />
+                <h4 className="text-base sm:text-lg font-semibold text-gray-900">Ubicación del Club</h4>
               </div>
-              <p className="text-sm sm:text-base text-rose-200 text-center leading-relaxed">
+              <p className="text-sm sm:text-base text-gray-700 text-center leading-relaxed">
                 P.º Cristóbal Colón 725, Moderna de la Cruz<br />
                 50180 Toluca de Lerdo, Estado de México
               </p>

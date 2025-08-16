@@ -351,11 +351,11 @@ const Index = () => {
             </div>
             {!user && (
               <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center animate-fade-in delay-700">
-                <Button size="lg" className="text-base sm:text-lg px-6 sm:px-8 hover:scale-105 transition-transform duration-300 shadow-lg" onClick={() => navigate("/login")}>
+                <Button size="lg" className="text-base sm:text-lg px-6 sm:px-8 hover:scale-105 transition-transform duration-300 shadow-lg bg-gradient-to-r from-rose-600 to-purple-600 text-white hover:from-rose-700 hover:to-purple-700 shadow-rose-500/25" onClick={() => navigate("/login")}>
                   <UserCheck className="h-4 w-4 sm:h-5 sm:w-5 mr-2" />
                   Comenzar Ahora
                 </Button>
-                <Button size="lg" variant="outline" className="text-base sm:text-lg px-6 sm:px-8 hover:scale-105 transition-transform duration-300 shadow-lg" onClick={() => navigate("/login")}>
+                <Button size="lg" variant="outline" className="text-base sm:text-lg px-6 sm:px-8 hover:scale-105 transition-transform duration-300 shadow-lg border-rose-400/50 text-rose-200 hover:bg-rose-500/20" onClick={() => navigate("/login")}>
                   <Mail className="h-4 w-4 sm:h-5 sm:w-5 mr-2" />
                   Iniciar Sesión
                 </Button>
@@ -433,9 +433,13 @@ const Index = () => {
 
         {/* Features Grid */}
         <section className="mb-8 sm:mb-16 px-4 bg-gradient-to-br from-purple-900/60 to-rose-900/60 backdrop-blur-sm p-6 rounded-lg shadow-xl border border-rose-400/30">
-          <h3 className="text-2xl sm:text-3xl font-bold text-center mb-8 sm:mb-12 animate-fade-in text-white">¿Cómo Funciona?</h3>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-            <Card className="text-center hover:scale-105 transition-transform duration-300 animate-fade-in delay-200 border-rose-400/30 bg-gradient-to-br from-purple-800/40 to-rose-800/40 backdrop-blur-sm hover:shadow-lg hover:shadow-rose-500/25">
+          <h3 className="text-2xl sm:text-3xl font-bold text-center mb-8 sm:mb-12 animate-fade-in text-white">Políticas y Términos</h3>
+          <p className="text-center text-rose-100 mb-8 max-w-3xl mx-auto">
+            Información importante que debes conocer antes de registrarte
+          </p>
+          <div className="grid lg:grid-cols-2 gap-4 sm:gap-8">
+            {/* Terms and Conditions */}
+            <Card className="hover:scale-105 transition-transform duration-300 animate-fade-in delay-200 border-rose-400/30 bg-gradient-to-br from-purple-800/40 to-rose-800/40 backdrop-blur-sm hover:shadow-lg hover:shadow-rose-500/25">
               <CardHeader className="p-4 sm:p-6">
                 <Calendar className="h-10 w-10 sm:h-12 sm:w-12 text-rose-300 mx-auto mb-4 animate-float" />
                 <CardTitle className="text-lg sm:text-xl text-white">Eventos Disponibles</CardTitle>
@@ -448,7 +452,8 @@ const Index = () => {
               </CardContent>
             </Card>
 
-            <Card className="text-center hover:scale-105 transition-transform duration-300 animate-fade-in delay-400 border-rose-400/30 bg-gradient-to-br from-purple-800/40 to-rose-800/40 backdrop-blur-sm hover:shadow-lg hover:shadow-rose-500/25">
+            {/* Security Features */}
+            <Card className="hover:scale-105 transition-transform duration-300 animate-fade-in delay-400 border-rose-400/30 bg-gradient-to-br from-purple-800/40 to-rose-800/40 backdrop-blur-sm hover:shadow-lg hover:shadow-rose-500/25">
               <CardHeader className="p-4 sm:p-6">
                 <Clock className="h-10 w-10 sm:h-12 sm:w-12 text-purple-300 mx-auto mb-4 animate-float delay-500" />
                 <CardTitle className="text-lg sm:text-xl text-white">Reserva Tu Lugar</CardTitle>
@@ -457,19 +462,6 @@ const Index = () => {
                 <p className="text-rose-100">
                   Selecciona el horario que prefieras y reserva tu lugar.
                   El sistema controla automáticamente la capacidad.
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card className="text-center hover:scale-105 transition-transform duration-300 animate-fade-in delay-600 border-rose-400/30 bg-gradient-to-br from-purple-800/40 to-rose-800/40 backdrop-blur-sm hover:shadow-lg hover:shadow-rose-500/25">
-              <CardHeader className="p-4 sm:p-6">
-                <QrCode className="h-10 w-10 sm:h-12 sm:w-12 text-fuchsia-300 mx-auto mb-4 animate-float delay-1000" />
-                <CardTitle className="text-lg sm:text-xl text-white">Acceso con QR</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-rose-100">
-                  Recibe tu código QR único para acceder al evento.
-                  Presenta tu código en la entrada para registro.
                 </p>
               </CardContent>
             </Card>
@@ -546,7 +538,7 @@ const Index = () => {
         </section>
 
         {/* Instructions Section */}
-        <section className="mb-8 sm:mb-16 px-4">
+        <section className="mb-8 sm:mb-16 px-4 bg-gradient-to-br from-purple-900/60 to-rose-900/60 backdrop-blur-sm p-6 rounded-lg shadow-xl border border-rose-400/30">
           <Card className="max-w-6xl mx-auto hover:scale-105 transition-transform duration-300 animate-fade-in">
             <CardHeader className="text-center p-4 sm:p-6">
               <CardTitle className="text-2xl sm:text-3xl">Instrucciones Detalladas</CardTitle>
@@ -714,36 +706,47 @@ const Index = () => {
             {/* Terms and Conditions */}
             <Card className="border-primary/20">
               <CardHeader>
-                <CardTitle className="text-xl text-primary flex items-center">
-                  <Shield className="h-6 w-6 mr-2" />
+                <CardTitle className="text-lg sm:text-xl mb-4 flex items-center text-white">
+                  <Shield className="h-5 w-5 sm:h-6 sm:w-6 text-rose-300 mr-2" />
                   Términos y Condiciones
                 </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="space-y-3 text-sm">
+                <CardDescription className="space-y-4">
                   <div className="p-3 bg-muted/50 rounded-lg">
-                    <h5 className="font-semibold mb-2">📋 Datos Requeridos</h5>
-                    <p className="text-muted-foreground">
-                      <strong>Registro Individual:</strong> Nombre completo, email, teléfono<br />
+                    <h5 className="font-semibold mb-1 flex items-center text-white">
+                      <Info className="h-4 w-4 mr-2 text-rose-300" />
+                      📋 Datos Requeridos
+                    </h5>
+                    <p className="text-sm text-rose-100 mb-2">
+                      <strong>Registro Individual:</strong> Nombre completo, email, teléfono
+                    </p>
+                    <p className="text-sm text-rose-100">
                       <strong>Registro en Pareja:</strong> Datos completos de ambas personas
                     </p>
                   </div>
+                  
                   <div className="p-3 bg-muted/50 rounded-lg">
-                    <h5 className="font-semibold mb-2">💰 Política de Pagos</h5>
-                    <p className="text-muted-foreground">
-                      Los pagos son NO REEMBOLSABLES. Para eventos de pago, 
-                      el comprobante debe presentarse junto con el código QR.
+                    <h5 className="font-semibold mb-1 flex items-center text-white">
+                      <Shield className="h-4 w-4 mr-2 text-purple-300" />
+                      💰 Política de Pagos
+                    </h5>
+                    <p className="text-sm text-rose-100">
+                      Los pagos son NO REEMBOLSABLES. Para eventos de pago, el comprobante debe presentarse 
+                      junto con el código QR.
                     </p>
                   </div>
+                  
                   <div className="p-3 bg-muted/50 rounded-lg">
-                    <h5 className="font-semibold mb-2">🆔 Acceso al Evento</h5>
-                    <p className="text-muted-foreground">
-                      El código QR es OBLIGATORIO para el acceso. 
-                      Sin excepción, no se permite entrada sin código válido.
+                    <h5 className="font-semibold mb-1 flex items-center text-white">
+                      <QrCode className="h-4 w-4 mr-2 text-fuchsia-300" />
+                      🆔 Acceso al Evento
+                    </h5>
+                    <p className="text-sm text-rose-100">
+                      El código QR es OBLIGATORIO para el acceso. Sin excepción, no se permite entrada sin código 
+                      válido.
                     </p>
                   </div>
-                </div>
-              </CardContent>
+                </CardDescription>
+              </CardHeader>
             </Card>
           </div>
 
@@ -819,18 +822,16 @@ const Index = () => {
       </main>
 
       {/* Footer */}
-      <footer className="border-t bg-gradient-to-r from-primary/10 to-primary/5 mt-16 relative">
-        <div className="container mx-auto px-4 py-12 text-center">
-          <div className="mb-6 flex flex-col items-center">
-            <Logo size="md" className="mb-4" />
-            <p className="text-muted-foreground">Estado de México</p>
-          </div>
-          <div className="text-sm text-muted-foreground space-y-2">
-            <p>© 2024 karoVicious Toluca - Sistema de Gestión de Eventos</p>
-            <p>Plataforma segura y confiable para la gestión de eventos del club</p>
-            <p className="text-xs opacity-75 mt-4">
-              P.º Cristóbal Colón 725, Moderna de la Cruz, 50180 Toluca de Lerdo, Estado de México
-            </p>
+      <footer className="border-t border-rose-500/30 bg-black/60 backdrop-blur-sm py-6 sm:py-8 mt-8 sm:mt-16">
+        <div className="container mx-auto px-4 text-center">
+          <div className="flex flex-col sm:flex-row items-center justify-between space-y-4 sm:space-y-0">
+            <div className="flex items-center space-x-2">
+              <Logo size="sm" />
+              <span className="text-sm text-rose-200">© 2024 karoVicious. Todos los derechos reservados.</span>
+            </div>
+            <div className="flex items-center space-x-4">
+              <span className="text-xs text-rose-100">Plataforma exclusiva para adultos (+18)</span>
+            </div>
           </div>
         </div>
       </footer>

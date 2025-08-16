@@ -20,7 +20,8 @@ import {
   Settings,
   Info,
   Heart,
-  Sparkles
+  Sparkles,
+  Download
 } from "lucide-react";
 import type { User, Session } from "@supabase/supabase-js";
 import Logo from "@/components/ui/Logo";
@@ -264,6 +265,14 @@ const Index = () => {
                 <Button onClick={() => navigate("/login")} className="hover:scale-105 transition-transform text-sm px-3 sm:px-4">
                   Registrarse
                 </Button>
+                <a 
+                  href="https://github.com/karovicious/karovicious/releases/download/untagged-be3aa0c534287476797c/app-release.apk"
+                  download
+                  className="ml-2 inline-flex items-center justify-center rounded-md bg-green-600 px-3 sm:px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-green-700 hover:scale-105 transition-transform"
+                >
+                  <Download className="h-4 w-4 mr-2" />
+                  <span className="hidden sm:inline">Descargar App</span>
+                </a>
               </div>
             )}
           </div>

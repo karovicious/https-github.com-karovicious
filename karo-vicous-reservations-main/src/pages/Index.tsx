@@ -1,0 +1,797 @@
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { supabase } from "@/integrations/supabase/client";
+import { toast } from "@/hooks/use-toast";
+import { 
+  Calendar, 
+  Clock, 
+  Users, 
+  QrCode, 
+  CheckCircle, 
+  Shield, 
+  MapPin, 
+  Mail,
+  LogOut,
+  UserCheck,
+  Settings,
+  Info,
+  Heart,
+  Sparkles
+} from "lucide-react";
+import type { User, Session } from "@supabase/supabase-js";
+
+const Index = () => {
+  const [user, setUser] = useState<User | null>(null);
+  const [session, setSession] = useState<Session | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [showWelcomeModal, setShowWelcomeModal] = useState(false);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    // Check if user has seen welcome modal
+    const hasSeenWelcome = localStorage.getItem('hasSeenWelcome');
+    if (!hasSeenWelcome) {
+      setShowWelcomeModal(true);
+    }
+
+    // Set up auth state listener
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(
+      (event, session) => {
+        setSession(session);
+        setUser(session?.user ?? null);
+        setLoading(false);
+      }
+    );
+
+    // Check for existing session
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setSession(session);
+      setUser(session?.user ?? null);
+      setLoading(false);
+    });
+
+    return () => subscription.unsubscribe();
+  }, []);
+
+  const handleSignOut = async () => {
+    try {
+      const { error } = await supabase.auth.signOut();
+      if (error) {
+        toast({
+          title: "Error al cerrar sesión",
+          description: error.message,
+          variant: "destructive",
+        });
+      } else {
+        toast({
+          title: "Sesión cerrada",
+          description: "Has cerrado sesión correctamente",
+        });
+      }
+    } catch (err) {
+      toast({
+        title: "Error",
+        description: "Ocurrió un error inesperado",
+        variant: "destructive",
+      });
+    }
+  };
+
+  const handleCloseWelcome = () => {
+    localStorage.setItem('hasSeenWelcome', 'true');
+    setShowWelcomeModal(false);
+  };
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-background">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto mb-4"></div>
+          <p className="text-muted-foreground">Cargando...</p>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <>
+      {/* Welcome Modal */}
+      <Dialog open={showWelcomeModal} onOpenChange={setShowWelcomeModal}>
+        <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto bg-slate-900/95 border-rose-500/30 text-rose-100">
+          <DialogHeader className="text-center">
+            <div className="flex items-center justify-center mb-4">
+              <Heart className="h-8 w-8 text-rose-400 mr-2 animate-pulse" />
+              <DialogTitle className="text-2xl sm:text-3xl bg-gradient-to-r from-rose-400 via-red-400 to-rose-300 bg-clip-text text-transparent">
+                ¡Bienvenido a karoVicious Toluca!
+              </DialogTitle>
+              <Sparkles className="h-8 w-8 text-rose-400 ml-2 animate-pulse" />
+            </div>
+            <DialogDescription className="text-rose-200 text-lg">
+              Tu plataforma exclusiva para eventos únicos y experiencias sensuales
+            </DialogDescription>
+          </DialogHeader>
+          
+          <div className="space-y-6 p-4">
+            {/* What is this platform */}
+            <div className="bg-slate-800/50 rounded-lg p-4 border border-rose-500/20">
+              <h3 className="text-xl font-semibold text-rose-300 mb-3 flex items-center">
+                <Info className="h-5 w-5 mr-2" />
+                ¿Qué es karoVicious?
+              </h3>
+              <p className="text-rose-100 leading-relaxed">
+                karoVicious es un club exclusivo de experiencias para adultos ubicado en Toluca, Estado de México. 
+                Nuestra plataforma te permite registrarte de manera segura para eventos únicos, ya sea como pareja 
+                o individualmente (single). Ofrecemos un ambiente elegante, discreto y sofisticado para personas 
+                que buscan experiencias especiales.
+              </p>
+            </div>
+
+            {/* How to use */}
+            <div className="bg-slate-800/50 rounded-lg p-4 border border-rose-500/20">
+              <h3 className="text-xl font-semibold text-rose-300 mb-3">
+                ¿Cómo usar la plataforma?
+              </h3>
+              <div className="space-y-3">
+                <div className="flex items-start space-x-3">
+                  <Badge className="bg-rose-600/20 text-rose-300">1</Badge>
+                  <p className="text-rose-100">
+                    <strong>Regístrate:</strong> Crea tu cuenta con un email válido y contraseña segura
+                  </p>
+                </div>
+                <div className="flex items-start space-x-3">
+                  <Badge className="bg-rose-600/20 text-rose-300">2</Badge>
+                  <p className="text-rose-100">
+                    <strong>Explora eventos:</strong> Revisa los eventos disponibles con fechas y horarios
+                  </p>
+                </div>
+                <div className="flex items-start space-x-3">
+                  <Badge className="bg-rose-600/20 text-rose-300">3</Badge>
+                  <p className="text-rose-100">
+                    <strong>Elige tu tipo:</strong> Selecciona registro en pareja o individual (single)
+                  </p>
+                </div>
+                <div className="flex items-start space-x-3">
+                  <Badge className="bg-rose-600/20 text-rose-300">4</Badge>
+                  <p className="text-rose-100">
+                    <strong>Reserva tu lugar:</strong> Completa el registro y recibe tu código QR único
+                  </p>
+                </div>
+                <div className="flex items-start space-x-3">
+                  <Badge className="bg-rose-600/20 text-rose-300">5</Badge>
+                  <p className="text-rose-100">
+                    <strong>Asiste al evento:</strong> Presenta tu QR en la entrada para acceso instantáneo
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Important policies */}
+            <div className="bg-slate-800/50 rounded-lg p-4 border border-rose-500/20">
+              <h3 className="text-xl font-semibold text-rose-300 mb-3 flex items-center">
+                <Shield className="h-5 w-5 mr-2" />
+                Políticas Importantes
+              </h3>
+              <div className="space-y-2 text-sm text-rose-100">
+                <div className="flex items-center">
+                  <CheckCircle className="h-4 w-4 text-green-400 mr-2 flex-shrink-0" />
+                  <span>Ambiente exclusivo para adultos (+18)</span>
+                </div>
+                <div className="flex items-center">
+                  <CheckCircle className="h-4 w-4 text-green-400 mr-2 flex-shrink-0" />
+                  <span>Registro único y sin cancelaciones una vez confirmado</span>
+                </div>
+                <div className="flex items-center">
+                  <CheckCircle className="h-4 w-4 text-green-400 mr-2 flex-shrink-0" />
+                  <span>Códigos QR personales e intransferibles</span>
+                </div>
+                <div className="flex items-center">
+                  <CheckCircle className="h-4 w-4 text-green-400 mr-2 flex-shrink-0" />
+                  <span>Máxima discreción y privacidad garantizada</span>
+                </div>
+                <div className="flex items-center">
+                  <CheckCircle className="h-4 w-4 text-green-400 mr-2 flex-shrink-0" />
+                  <span>Ambiente de respeto mutuo y consenso</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Contact and location */}
+            <div className="bg-slate-800/50 rounded-lg p-4 border border-rose-500/20">
+              <h3 className="text-xl font-semibold text-rose-300 mb-3 flex items-center">
+                <MapPin className="h-5 w-5 mr-2" />
+                Ubicación & Contacto
+              </h3>
+              <p className="text-rose-100 text-center">
+                <strong>P.º Cristóbal Colón 725, Moderna de la Cruz</strong><br />
+                50180 Toluca de Lerdo, Estado de México
+              </p>
+            </div>
+          </div>
+
+          <div className="flex justify-center pt-4">
+            <Button 
+              onClick={handleCloseWelcome}
+              className="bg-gradient-to-r from-rose-600 to-red-600 hover:from-rose-700 hover:to-red-700 text-white px-8 py-2 rounded-lg shadow-lg hover:scale-105 transition-transform duration-300"
+            >
+              Entendido, comenzar
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
+
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-red-950/30 to-rose-900/40 relative overflow-hidden">
+      {/* Animated background elements */}
+      <div className="absolute inset-0 opacity-30">
+        <div className="absolute top-20 left-10 w-16 h-16 sm:w-32 sm:h-32 bg-red-600/20 rounded-full blur-3xl animate-pulse-glow"></div>
+        <div className="absolute top-40 right-20 w-12 h-12 sm:w-24 sm:h-24 bg-rose-500/30 rounded-full blur-2xl animate-float"></div>
+        <div className="absolute bottom-20 left-1/3 w-20 h-20 sm:w-40 sm:h-40 bg-red-700/15 rounded-full blur-3xl animate-pulse-glow"></div>
+        <div className="absolute top-1/2 right-10 w-8 h-8 sm:w-16 sm:h-16 bg-rose-400/25 rounded-full blur-xl animate-pulse-glow delay-500"></div>
+        <div className="absolute bottom-40 right-1/4 w-12 h-12 sm:w-24 sm:h-24 bg-red-800/10 rounded-full blur-2xl animate-float delay-1000"></div>
+      </div>
+      {/* Header */}
+      <header className="border-b border-rose-500/20 bg-slate-900/95 backdrop-blur-sm sticky top-0 z-50 relative animate-fade-in">
+        <div className="container mx-auto px-2 sm:px-4 py-3 sm:py-4">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center space-x-2">
+              <Calendar className="h-6 w-6 sm:h-8 sm:w-8 text-rose-400 animate-float" />
+              <h1 className="text-lg sm:text-2xl font-bold bg-gradient-to-r from-rose-400 via-red-400 to-rose-300 bg-clip-text text-transparent">
+                karoVicious Toluca
+              </h1>
+            </div>
+            
+            {user ? (
+              <div className="flex items-center space-x-2 sm:space-x-4">
+                <span className="hidden sm:block text-sm text-muted-foreground">
+                  Bienvenido, {user.email}
+                </span>
+                <Button variant="outline" size="sm" onClick={() => navigate("/admin")} className="hover:scale-105 transition-transform">
+                  <Settings className="h-4 w-4 sm:mr-2" />
+                  <span className="hidden sm:inline">Admin</span>
+                </Button>
+                <Button variant="outline" size="sm" onClick={handleSignOut} className="hover:scale-105 transition-transform">
+                  <LogOut className="h-4 w-4 sm:mr-2" />
+                  <span className="hidden sm:inline">Cerrar Sesión</span>
+                </Button>
+              </div>
+            ) : (
+              <div className="flex space-x-2">
+                <Button variant="outline" onClick={() => navigate("/login")} className="hover:scale-105 transition-transform text-sm px-3 sm:px-4">
+                  Iniciar Sesión
+                </Button>
+                <Button onClick={() => navigate("/login")} className="hover:scale-105 transition-transform text-sm px-3 sm:px-4">
+                  Registrarse
+                </Button>
+              </div>
+            )}
+          </div>
+        </div>
+      </header>
+
+      <main className="container mx-auto px-2 sm:px-4 py-4 sm:py-8">
+        {/* Hero Section */}
+        <section className="text-center mb-8 sm:mb-16 relative z-10">
+          <div className="max-w-4xl mx-auto animate-fade-in">
+            <div className="mb-6 sm:mb-8">
+              <h2 className="text-3xl sm:text-5xl md:text-7xl font-bold mb-4 bg-gradient-to-r from-rose-400 via-red-400 to-rose-300 bg-clip-text text-transparent animate-pulse-glow">
+                karoVicious Toluca
+              </h2>
+              <p className="text-base sm:text-lg text-muted-foreground mb-2 animate-fade-in delay-200">Edo. México</p>
+              <div className="w-16 sm:w-24 h-1 bg-gradient-to-r from-rose-400 to-red-400 mx-auto rounded-full mb-4 sm:mb-6 animate-fade-in delay-300"></div>
+            </div>
+            
+            <h3 className="text-xl sm:text-3xl md:text-4xl font-bold mb-4 sm:mb-6 text-foreground animate-fade-in delay-400">
+              Sistema de Gestión de Eventos
+            </h3>
+            <p className="text-base sm:text-xl text-muted-foreground mb-6 sm:mb-8 max-w-3xl mx-auto leading-relaxed animate-fade-in delay-500">
+              Plataforma exclusiva para la gestión y control de acceso a eventos del club.
+              Reserva tu lugar como pareja o single, confirma tu asistencia y accede con códigos QR únicos y seguros.
+            </p>
+            
+            {/* Club Location */}
+            <div className="bg-slate-800/50 backdrop-blur-sm border border-rose-500/30 rounded-xl p-4 sm:p-6 mb-6 sm:mb-8 max-w-2xl mx-auto shadow-lg shadow-rose-500/20 animate-fade-in delay-600 hover:scale-105 transition-transform duration-300">
+              <div className="flex items-center justify-center mb-4">
+                <MapPin className="h-5 w-5 sm:h-6 sm:w-6 text-rose-400 mr-2 animate-pulse" />
+                <h4 className="text-base sm:text-lg font-semibold text-rose-100">Ubicación del Club</h4>
+              </div>
+              <p className="text-sm sm:text-base text-rose-200 text-center leading-relaxed">
+                P.º Cristóbal Colón 725, Moderna de la Cruz<br />
+                50180 Toluca de Lerdo, Estado de México
+              </p>
+            </div>
+            {!user && (
+              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center animate-fade-in delay-700">
+                <Button size="lg" className="text-base sm:text-lg px-6 sm:px-8 hover:scale-105 transition-transform duration-300 shadow-lg" onClick={() => navigate("/login")}>
+                  <UserCheck className="h-4 w-4 sm:h-5 sm:w-5 mr-2" />
+                  Comenzar Ahora
+                </Button>
+                <Button size="lg" variant="outline" className="text-base sm:text-lg px-6 sm:px-8 hover:scale-105 transition-transform duration-300 shadow-lg" onClick={() => navigate("/login")}>
+                  <Mail className="h-4 w-4 sm:h-5 sm:w-5 mr-2" />
+                  Iniciar Sesión
+                </Button>
+              </div>
+            )}
+          </div>
+        </section>
+
+        {/* Registration Types Section */}
+        <section className="mb-8 sm:mb-16">
+          <div className="text-center mb-8 sm:mb-12 animate-fade-in">
+            <h3 className="text-2xl sm:text-3xl font-bold mb-4">Tipos de Registro</h3>
+            <p className="text-sm sm:text-base text-muted-foreground max-w-2xl mx-auto px-4">
+              Elige el tipo de registro que mejor se adapte a ti
+            </p>
+          </div>
+          <div className="grid md:grid-cols-2 gap-4 sm:gap-8 max-w-4xl mx-auto px-4">
+            <Card className="border-primary/20 bg-gradient-to-br from-primary/5 to-primary/10 hover:shadow-lg hover:scale-105 transition-all duration-300 animate-fade-in delay-200">
+              <CardHeader className="text-center p-4 sm:p-6">
+                <div className="w-12 h-12 sm:w-16 sm:h-16 bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-4 animate-pulse-glow">
+                  <Users className="h-6 w-6 sm:h-8 sm:w-8 text-primary" />
+                </div>
+                <CardTitle className="text-lg sm:text-xl">Registro en Pareja</CardTitle>
+              </CardHeader>
+              <CardContent className="text-center space-y-3">
+                <p className="text-muted-foreground">
+                  Registro conjunto para dos personas que asistirán juntas al evento
+                </p>
+                <ul className="text-sm space-y-2 text-left">
+                  <li className="flex items-center">
+                    <CheckCircle className="h-4 w-4 text-green-500 mr-2" />
+                    <span>Un solo código QR para ambos</span>
+                  </li>
+                  <li className="flex items-center">
+                    <CheckCircle className="h-4 w-4 text-green-500 mr-2" />
+                    <span>Acceso simultáneo</span>
+                  </li>
+                  <li className="flex items-center">
+                    <CheckCircle className="h-4 w-4 text-green-500 mr-2" />
+                    <span>Datos de ambas personas requeridos</span>
+                  </li>
+                </ul>
+              </CardContent>
+            </Card>
+
+            <Card className="border-primary/20 bg-gradient-to-br from-primary/5 to-primary/10 hover:shadow-lg hover:scale-105 transition-all duration-300 animate-fade-in delay-400">
+              <CardHeader className="text-center p-4 sm:p-6">
+                <div className="w-12 h-12 sm:w-16 sm:h-16 bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-4 animate-pulse-glow">
+                  <UserCheck className="h-6 w-6 sm:h-8 sm:w-8 text-primary" />
+                </div>
+                <CardTitle className="text-lg sm:text-xl">Registro Individual (Single)</CardTitle>
+              </CardHeader>
+              <CardContent className="text-center space-y-3">
+                <p className="text-muted-foreground">
+                  Registro personal para una sola persona
+                </p>
+                <ul className="text-sm space-y-2 text-left">
+                  <li className="flex items-center">
+                    <CheckCircle className="h-4 w-4 text-green-500 mr-2" />
+                    <span>Código QR individual</span>
+                  </li>
+                  <li className="flex items-center">
+                    <CheckCircle className="h-4 w-4 text-green-500 mr-2" />
+                    <span>Acceso personal único</span>
+                  </li>
+                  <li className="flex items-center">
+                    <CheckCircle className="h-4 w-4 text-green-500 mr-2" />
+                    <span>Solo tus datos personales</span>
+                  </li>
+                </ul>
+              </CardContent>
+            </Card>
+          </div>
+        </section>
+
+        {/* Features Grid */}
+        <section className="mb-8 sm:mb-16 px-4">
+          <h3 className="text-2xl sm:text-3xl font-bold text-center mb-8 sm:mb-12 animate-fade-in">¿Cómo Funciona?</h3>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+            <Card className="text-center hover:scale-105 transition-transform duration-300 animate-fade-in delay-200">
+              <CardHeader className="p-4 sm:p-6">
+                <Calendar className="h-10 w-10 sm:h-12 sm:w-12 text-primary mx-auto mb-4 animate-float" />
+                <CardTitle className="text-lg sm:text-xl">Eventos Disponibles</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-muted-foreground">
+                  Consulta todos los eventos disponibles del club con fechas, 
+                  horarios y capacidad en tiempo real.
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card className="text-center hover:scale-105 transition-transform duration-300 animate-fade-in delay-400">
+              <CardHeader className="p-4 sm:p-6">
+                <Clock className="h-10 w-10 sm:h-12 sm:w-12 text-primary mx-auto mb-4 animate-float delay-500" />
+                <CardTitle className="text-lg sm:text-xl">Reserva Tu Lugar</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-muted-foreground">
+                  Selecciona el horario que prefieras y reserva tu lugar.
+                  El sistema controla automáticamente la capacidad.
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card className="text-center hover:scale-105 transition-transform duration-300 animate-fade-in delay-600">
+              <CardHeader className="p-4 sm:p-6">
+                <QrCode className="h-10 w-10 sm:h-12 sm:w-12 text-primary mx-auto mb-4 animate-float delay-1000" />
+                <CardTitle className="text-lg sm:text-xl">Acceso con QR</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-muted-foreground">
+                  Recibe tu código QR único para acceder al evento.
+                  Presenta tu código en la entrada para registro.
+                </p>
+              </CardContent>
+            </Card>
+          </div>
+        </section>
+
+        {/* Payment & Security Section */}
+        <section className="mb-8 sm:mb-16 px-4">
+          <div className="grid lg:grid-cols-2 gap-4 sm:gap-8">
+            {/* Payment Methods */}
+            <Card className="border-primary/20 hover:scale-105 transition-transform duration-300 animate-fade-in delay-200">
+              <CardHeader className="p-4 sm:p-6">
+                <CardTitle className="flex items-center text-lg sm:text-xl">
+                  <Mail className="h-5 w-5 sm:h-6 sm:w-6 text-primary mr-2 animate-pulse" />
+                  Métodos de Pago
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="space-y-3">
+                  <div className="p-3 bg-muted/50 rounded-lg">
+                    <h5 className="font-semibold mb-1">💳 Pago en Efectivo</h5>
+                    <p className="text-sm text-muted-foreground">
+                      Pago directo en la recepción del club al momento del evento
+                    </p>
+                  </div>
+                  <div className="p-3 bg-muted/50 rounded-lg">
+                    <h5 className="font-semibold mb-1">📱 Transferencia Bancaria</h5>
+                    <p className="text-sm text-muted-foreground">
+                      Comprobante de pago requerido al registrarse
+                    </p>
+                  </div>
+                  <div className="p-3 bg-muted/50 rounded-lg">
+                    <h5 className="font-semibold mb-1">🎫 Eventos Gratuitos</h5>
+                    <p className="text-sm text-muted-foreground">
+                      Solo requieren registro previo con código QR
+                    </p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Security */}
+            <Card className="border-primary/20 hover:scale-105 transition-transform duration-300 animate-fade-in delay-400">
+              <CardHeader className="p-4 sm:p-6">
+                <CardTitle className="flex items-center text-lg sm:text-xl">
+                  <Shield className="h-5 w-5 sm:h-6 sm:w-6 text-primary mr-2 animate-pulse" />
+                  Seguridad y Privacidad
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="space-y-3">
+                  <div className="p-3 bg-muted/50 rounded-lg">
+                    <h5 className="font-semibold mb-1">🔒 Datos Protegidos</h5>
+                    <p className="text-sm text-muted-foreground">
+                      Información personal encriptada y protegida
+                    </p>
+                  </div>
+                  <div className="p-3 bg-muted/50 rounded-lg">
+                    <h5 className="font-semibold mb-1">🆔 Códigos QR Únicos</h5>
+                    <p className="text-sm text-muted-foreground">
+                      Generación única por evento, imposible de duplicar
+                    </p>
+                  </div>
+                  <div className="p-3 bg-muted/50 rounded-lg">
+                    <h5 className="font-semibold mb-1">📊 Acceso Controlado</h5>
+                    <p className="text-sm text-muted-foreground">
+                      Solo personal autorizado puede escanear códigos QR
+                    </p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </section>
+
+        {/* Instructions Section */}
+        <section className="mb-8 sm:mb-16 px-4">
+          <Card className="max-w-6xl mx-auto hover:scale-105 transition-transform duration-300 animate-fade-in">
+            <CardHeader className="text-center p-4 sm:p-6">
+              <CardTitle className="text-2xl sm:text-3xl">Instrucciones Detalladas</CardTitle>
+              <CardDescription className="text-base sm:text-lg">
+                Guía completa paso a paso para usar el sistema de eventos
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-6">
+              <div className="grid md:grid-cols-2 gap-6">
+                <div className="space-y-4">
+                  <h4 className="font-semibold text-lg flex items-center">
+                    <Badge className="mr-2">1</Badge>
+                    Para Usuarios
+                  </h4>
+                  <ul className="space-y-2 text-sm">
+                    <li className="flex items-start">
+                      <CheckCircle className="h-4 w-4 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
+                      <span>Regístrate con tu email y crea una contraseña segura</span>
+                    </li>
+                    <li className="flex items-start">
+                      <CheckCircle className="h-4 w-4 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
+                      <span>Explora los eventos disponibles y sus horarios</span>
+                    </li>
+                    <li className="flex items-start">
+                      <CheckCircle className="h-4 w-4 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
+                      <span>Reserva tu lugar en el evento y horario preferido</span>
+                    </li>
+                    <li className="flex items-start">
+                      <CheckCircle className="h-4 w-4 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
+                      <span>Guarda tu código QR para presentar en el evento</span>
+                    </li>
+                    <li className="flex items-start">
+                      <CheckCircle className="h-4 w-4 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
+                      <span>Presenta tu QR en la entrada para registro automático</span>
+                    </li>
+                  </ul>
+                </div>
+
+                <div className="space-y-4">
+                  <h4 className="font-semibold text-lg flex items-center">
+                    <Badge className="mr-2">2</Badge>
+                    Para Administradores
+                  </h4>
+                  <ul className="space-y-2 text-sm">
+                    <li className="flex items-start">
+                      <Shield className="h-4 w-4 text-blue-500 mr-2 mt-0.5 flex-shrink-0" />
+                      <span>Accede al panel de administración con credenciales</span>
+                    </li>
+                    <li className="flex items-start">
+                      <Shield className="h-4 w-4 text-blue-500 mr-2 mt-0.5 flex-shrink-0" />
+                      <span>Crea y gestiona eventos, fechas y horarios</span>
+                    </li>
+                    <li className="flex items-start">
+                      <Shield className="h-4 w-4 text-blue-500 mr-2 mt-0.5 flex-shrink-0" />
+                      <span>Escanea códigos QR para verificar asistencia</span>
+                    </li>
+                    <li className="flex items-start">
+                      <Shield className="h-4 w-4 text-blue-500 mr-2 mt-0.5 flex-shrink-0" />
+                      <span>Controla capacidad y registra entradas en tiempo real</span>
+                    </li>
+                    <li className="flex items-start">
+                      <Shield className="h-4 w-4 text-blue-500 mr-2 mt-0.5 flex-shrink-0" />
+                      <span>Visualiza reportes y estadísticas de eventos</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </section>
+
+        {/* Info Cards */}
+        <section className="grid md:grid-cols-3 gap-6 mb-12">
+          <Card className="bg-primary/5 border-primary/20">
+            <CardHeader>
+              <CardTitle className="flex items-center text-primary">
+                <Users className="h-5 w-5 mr-2" />
+                Control de Capacidad
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-sm">
+                El sistema automáticamente controla la capacidad máxima de cada evento
+                y horario, evitando sobrecupo y garantizando una experiencia óptima.
+              </p>
+            </CardContent>
+          </Card>
+
+          <Card className="bg-green-50 border-green-200">
+            <CardHeader>
+              <CardTitle className="flex items-center text-green-700">
+                <QrCode className="h-5 w-5 mr-2" />
+                Códigos QR Únicos
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-sm">
+                Cada reservación genera un código QR único e irrepetible,
+                garantizando la seguridad y evitando duplicaciones o fraudes.
+              </p>
+            </CardContent>
+          </Card>
+
+          <Card className="bg-blue-50 border-blue-200">
+            <CardHeader>
+              <CardTitle className="flex items-center text-blue-700">
+                <Shield className="h-5 w-5 mr-2" />
+                Gestión Segura
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-sm">
+                Sistema seguro con autenticación robusta, roles de usuario
+                y políticas de acceso que protegen la información del club.
+              </p>
+            </CardContent>
+          </Card>
+        </section>
+
+        {/* Comprehensive Policies Section */}
+        <section className="mb-16">
+          <div className="text-center mb-12">
+            <h3 className="text-3xl font-bold mb-4">Políticas y Términos</h3>
+            <p className="text-muted-foreground max-w-2xl mx-auto">
+              Información importante que debes conocer antes de registrarte
+            </p>
+          </div>
+          
+          <div className="grid lg:grid-cols-2 gap-8 mb-8">
+            {/* Registration Policies */}
+            <Card className="border-destructive/20 bg-destructive/5">
+              <CardHeader>
+                <CardTitle className="text-xl text-destructive flex items-center">
+                  <QrCode className="h-6 w-6 mr-2" />
+                  Políticas de Registro
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="space-y-3 text-sm">
+                  <div className="p-3 bg-card rounded-lg border border-destructive/20">
+                    <h5 className="font-semibold mb-2 text-destructive">🚫 SIN CANCELACIONES</h5>
+                    <p className="text-muted-foreground">
+                      Una vez realizado el registro para cualquier evento, <strong>NO hay cancelaciones posibles</strong>. 
+                      La reservación es definitiva y no se pueden hacer cambios.
+                    </p>
+                  </div>
+                  <div className="p-3 bg-card rounded-lg">
+                    <h5 className="font-semibold mb-2">📅 Registro Único</h5>
+                    <p className="text-muted-foreground">
+                      Solo se permite una reservación por usuario por evento. 
+                      Selecciona cuidadosamente tu tipo de registro (pareja o single).
+                    </p>
+                  </div>
+                  <div className="p-3 bg-card rounded-lg">
+                    <h5 className="font-semibold mb-2">⏰ Confirmación Inmediata</h5>
+                    <p className="text-muted-foreground">
+                      Al completar el registro, tu lugar queda confirmado automáticamente. 
+                      No hay periodo de gracia para cambios.
+                    </p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Terms and Conditions */}
+            <Card className="border-primary/20">
+              <CardHeader>
+                <CardTitle className="text-xl text-primary flex items-center">
+                  <Shield className="h-6 w-6 mr-2" />
+                  Términos y Condiciones
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="space-y-3 text-sm">
+                  <div className="p-3 bg-muted/50 rounded-lg">
+                    <h5 className="font-semibold mb-2">📋 Datos Requeridos</h5>
+                    <p className="text-muted-foreground">
+                      <strong>Registro Individual:</strong> Nombre completo, email, teléfono<br />
+                      <strong>Registro en Pareja:</strong> Datos completos de ambas personas
+                    </p>
+                  </div>
+                  <div className="p-3 bg-muted/50 rounded-lg">
+                    <h5 className="font-semibold mb-2">💰 Política de Pagos</h5>
+                    <p className="text-muted-foreground">
+                      Los pagos son NO REEMBOLSABLES. Para eventos de pago, 
+                      el comprobante debe presentarse junto con el código QR.
+                    </p>
+                  </div>
+                  <div className="p-3 bg-muted/50 rounded-lg">
+                    <h5 className="font-semibold mb-2">🆔 Acceso al Evento</h5>
+                    <p className="text-muted-foreground">
+                      El código QR es OBLIGATORIO para el acceso. 
+                      Sin excepción, no se permite entrada sin código válido.
+                    </p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+
+          {/* Additional Rules */}
+          <Card className="bg-card border-border">
+            <CardHeader>
+              <CardTitle className="text-xl flex items-center justify-center">
+                <Users className="h-6 w-6 mr-2" />
+                Reglas Adicionales del Club
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="grid md:grid-cols-3 gap-6 text-sm">
+                <div className="text-center">
+                  <h5 className="font-semibold mb-2">👔 Código de Vestimenta</h5>
+                  <p className="text-muted-foreground">
+                    Vestimenta apropiada requerida según el tipo de evento. 
+                    Consulta los detalles específicos en cada evento.
+                  </p>
+                </div>
+                <div className="text-center">
+                  <h5 className="font-semibold mb-2">🔞 Restricciones de Edad</h5>
+                  <p className="text-muted-foreground">
+                    Algunos eventos pueden tener restricciones de edad. 
+                    Verificación de ID requerida en la entrada.
+                  </p>
+                </div>
+                <div className="text-center">
+                  <h5 className="font-semibold mb-2">📱 Uso del Código QR</h5>
+                  <p className="text-muted-foreground">
+                    El código QR es personal e intransferible. 
+                    Compartirlo con terceros puede resultar en denegación de acceso.
+                  </p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </section>
+
+        {/* Contact Info */}
+        <section className="text-center">
+          <Card className="max-w-2xl mx-auto">
+            <CardHeader>
+              <CardTitle className="flex items-center justify-center text-2xl">
+                <MapPin className="h-6 w-6 mr-2" />
+                Información de Contacto
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-6">
+              <div className="grid md:grid-cols-2 gap-6 text-sm">
+                <div className="space-y-3">
+                  <h5 className="font-semibold">📧 Contacto Digital</h5>
+                  <p className="flex items-center justify-center">
+                    <Mail className="h-4 w-4 mr-2" />
+                    contacto@karovicious.com
+                  </p>
+                  <p className="text-muted-foreground">
+                    Para soporte técnico y consultas sobre eventos
+                  </p>
+                </div>
+                <div className="space-y-3">
+                  <h5 className="font-semibold">📍 Ubicación Física</h5>
+                  <div className="text-muted-foreground">
+                    <p>P.º Cristóbal Colón 725</p>
+                    <p>Moderna de la Cruz</p>
+                    <p>50180 Toluca de Lerdo, Méx.</p>
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </section>
+      </main>
+
+      {/* Footer */}
+      <footer className="border-t bg-gradient-to-r from-primary/10 to-primary/5 mt-16 relative">
+        <div className="container mx-auto px-4 py-12 text-center">
+          <div className="mb-6">
+            <h4 className="text-2xl font-bold bg-gradient-to-r from-primary to-primary-glow bg-clip-text text-transparent mb-2">
+              karoVicious Toluca
+            </h4>
+            <p className="text-muted-foreground">Edo. México</p>
+          </div>
+          <div className="text-sm text-muted-foreground space-y-2">
+            <p>© 2024 karoVicious Toluca - Sistema de Gestión de Eventos</p>
+            <p>Plataforma segura y confiable para la gestión de eventos del club</p>
+            <p className="text-xs opacity-75 mt-4">
+              P.º Cristóbal Colón 725, Moderna de la Cruz, 50180 Toluca de Lerdo, Estado de México
+            </p>
+          </div>
+        </div>
+      </footer>
+    </div>
+    </>
+  );
+};
+
+export default Index;

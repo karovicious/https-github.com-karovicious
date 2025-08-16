@@ -260,43 +260,45 @@ const Index = () => {
   return (
     <>
       <WelcomeModal />
-      <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100 text-gray-900 relative overflow-hidden">
+      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-rose-900 text-white relative overflow-hidden">
       {/* Animated background elements */}
-      <div className="absolute inset-0 opacity-30">
-        <div className="absolute top-20 left-10 w-16 h-16 sm:w-32 sm:h-32 bg-red-600/20 rounded-full blur-3xl animate-pulse-glow"></div>
-        <div className="absolute top-40 right-20 w-12 h-12 sm:w-24 sm:h-24 bg-rose-500/30 rounded-full blur-2xl animate-float"></div>
-        <div className="absolute bottom-20 left-1/3 w-20 h-20 sm:w-40 sm:h-40 bg-red-700/15 rounded-full blur-3xl animate-pulse-glow"></div>
-        <div className="absolute top-1/2 right-10 w-8 h-8 sm:w-16 sm:h-16 bg-rose-400/25 rounded-full blur-xl animate-pulse-glow delay-500"></div>
-        <div className="absolute bottom-40 right-1/4 w-12 h-12 sm:w-24 sm:h-24 bg-red-800/10 rounded-full blur-2xl animate-float delay-1000"></div>
+      <div className="absolute inset-0 opacity-40">
+        <div className="absolute top-20 left-10 w-16 h-16 sm:w-32 sm:h-32 bg-purple-500/30 rounded-full blur-3xl animate-pulse-glow"></div>
+        <div className="absolute top-40 right-20 w-12 h-12 sm:w-24 sm:h-24 bg-rose-500/40 rounded-full blur-2xl animate-float"></div>
+        <div className="absolute bottom-20 left-1/3 w-20 h-20 sm:w-40 sm:h-40 bg-pink-600/25 rounded-full blur-3xl animate-pulse-glow"></div>
+        <div className="absolute top-1/2 right-10 w-8 h-8 sm:w-16 sm:h-16 bg-fuchsia-500/35 rounded-full blur-xl animate-pulse-glow delay-500"></div>
+        <div className="absolute bottom-40 right-1/4 w-12 h-12 sm:w-24 sm:h-24 bg-violet-600/20 rounded-full blur-2xl animate-float delay-1000"></div>
+        <div className="absolute top-10 right-1/3 w-6 h-6 sm:w-12 sm:h-12 bg-rose-400/30 rounded-full blur-lg animate-pulse-glow delay-700"></div>
+        <div className="absolute bottom-10 left-20 w-10 h-10 sm:w-20 sm:h-20 bg-purple-400/25 rounded-full blur-2xl animate-float delay-300"></div>
       </div>
       {/* Header */}
-      <header className="border-b border-gray-200 bg-white/95 backdrop-blur-sm sticky top-0 z-50 animate-fade-in shadow-sm">
+      <header className="border-b border-rose-500/30 bg-black/80 backdrop-blur-sm sticky top-0 z-50 animate-fade-in shadow-lg shadow-rose-500/20">
         <div className="container mx-auto px-2 sm:px-4 py-3 sm:py-4">
           <div className="flex items-center justify-between">
             <Logo size="md" className="hover:scale-105 transition-transform duration-300" />
             
             {user ? (
               <div className="flex items-center space-x-2 sm:space-x-4">
-                <span className="hidden sm:block text-sm text-muted-foreground">
+                <span className="hidden sm:block text-sm text-rose-200">
                   Bienvenido, {user.email}
                 </span>
-                <Button variant="outline" size="sm" onClick={() => navigate("/admin")} className="hover:scale-105 transition-transform">
+                <Button variant="outline" size="sm" onClick={() => navigate("/admin")} className="hover:scale-105 transition-transform border-rose-400/50 text-rose-200 hover:bg-rose-500/20">
                   <Settings className="h-4 w-4 sm:mr-2" />
                   <span className="hidden sm:inline">Admin</span>
                 </Button>
-                <Button variant="outline" size="sm" onClick={handleSignOut} className="hover:scale-105 transition-transform">
+                <Button variant="outline" size="sm" onClick={handleSignOut} className="hover:scale-105 transition-transform border-rose-400/50 text-rose-200 hover:bg-rose-500/20">
                   <LogOut className="h-4 w-4 sm:mr-2" />
                   <span className="hidden sm:inline">Cerrar Sesión</span>
                 </Button>
               </div>
             ) : (
               <div className="flex space-x-2">
-                <Button variant="outline" onClick={() => navigate("/login")} className="hover:scale-105 transition-transform text-sm px-3 sm:px-4">
+                <Button variant="outline" onClick={() => navigate("/login")} className="hover:scale-105 transition-transform text-sm px-3 sm:px-4 border-rose-400/50 text-rose-200 hover:bg-rose-500/20">
                   Iniciar Sesión
                 </Button>
                 <Button 
                   onClick={() => navigate("/login")} 
-                  className="hover:scale-105 transition-transform text-sm px-3 sm:px-4 bg-primary text-primary-foreground hover:bg-primary/90"
+                  className="hover:scale-105 transition-transform text-sm px-3 sm:px-4 bg-gradient-to-r from-rose-600 to-purple-600 text-white hover:from-rose-700 hover:to-purple-700 shadow-lg shadow-rose-500/25"
                 >
                   Registrarse
                 </Button>
@@ -316,33 +318,33 @@ const Index = () => {
         </div>
       </header>
 
-      <main className="container mx-auto px-2 sm:px-4 py-4 sm:py-8 bg-white/80 backdrop-blur-sm rounded-lg shadow-lg border border-gray-200 mt-4">
+      <main className="container mx-auto px-2 sm:px-4 py-4 sm:py-8 bg-black/60 backdrop-blur-sm rounded-lg shadow-xl border border-rose-500/30 mt-4">
         {/* Hero Section */}
         <section className="text-center mb-8 sm:mb-16 relative z-10">
-          <div className="max-w-4xl mx-auto animate-fade-in bg-white p-6 rounded-lg shadow-lg border border-gray-200">
+          <div className="max-w-4xl mx-auto animate-fade-in bg-gradient-to-br from-purple-900/80 to-rose-900/80 backdrop-blur-sm p-6 rounded-lg shadow-xl border border-rose-400/30">
             <div className="mb-6 sm:mb-8">
               <h2 className="text-3xl sm:text-5xl md:text-7xl font-bold mb-4 bg-gradient-to-r from-rose-400 via-red-400 to-rose-300 bg-clip-text text-transparent animate-pulse-glow">
                 karoVicious Toluca
               </h2>
-              <p className="text-base sm:text-lg text-muted-foreground mb-2 animate-fade-in delay-200">Edo. México</p>
+              <p className="text-base sm:text-lg text-rose-200 mb-2 animate-fade-in delay-200">Edo. México</p>
               <div className="w-16 sm:w-24 h-1 bg-gradient-to-r from-rose-400 to-red-400 mx-auto rounded-full mb-4 sm:mb-6 animate-fade-in delay-300"></div>
             </div>
             
-            <h3 className="text-xl sm:text-3xl md:text-4xl font-bold mb-4 sm:mb-6 text-gray-900 animate-fade-in delay-400">
+            <h3 className="text-xl sm:text-3xl md:text-4xl font-bold mb-4 sm:mb-6 text-white animate-fade-in delay-400">
               Sistema de Gestión de Eventos
             </h3>
-            <p className="text-base sm:text-xl text-gray-600 mb-6 sm:mb-8 max-w-3xl mx-auto leading-relaxed animate-fade-in delay-500">
+            <p className="text-base sm:text-xl text-rose-100 mb-6 sm:mb-8 max-w-3xl mx-auto leading-relaxed animate-fade-in delay-500">
               Plataforma exclusiva para la gestión y control de acceso a eventos del club.
               Reserva tu lugar como pareja o single, confirma tu asistencia y accede con códigos QR únicos y seguros.
             </p>
             
             {/* Club Location */}
-            <div className="bg-gray-50 border border-gray-200 rounded-xl p-4 sm:p-6 mb-6 sm:mb-8 max-w-2xl mx-auto shadow-lg animate-fade-in delay-600 hover:scale-105 transition-transform duration-300">
+            <div className="bg-gradient-to-r from-rose-800/50 to-purple-800/50 border border-rose-400/40 rounded-xl p-4 sm:p-6 mb-6 sm:mb-8 max-w-2xl mx-auto shadow-lg shadow-rose-500/20 animate-fade-in delay-600 hover:scale-105 transition-transform duration-300">
               <div className="flex items-center justify-center mb-4">
-                <MapPin className="h-5 w-5 sm:h-6 sm:w-6 text-rose-600 mr-2 animate-pulse" />
-                <h4 className="text-base sm:text-lg font-semibold text-gray-900">Ubicación del Club</h4>
+                <MapPin className="h-5 w-5 sm:h-6 sm:w-6 text-rose-300 mr-2 animate-pulse" />
+                <h4 className="text-base sm:text-lg font-semibold text-white">Ubicación del Club</h4>
               </div>
-              <p className="text-sm sm:text-base text-gray-700 text-center leading-relaxed">
+              <p className="text-sm sm:text-base text-rose-100 text-center leading-relaxed">
                 P.º Cristóbal Colón 725, Moderna de la Cruz<br />
                 50180 Toluca de Lerdo, Estado de México
               </p>
@@ -363,23 +365,23 @@ const Index = () => {
         </section>
 
         {/* Registration Types Section */}
-        <section className="mb-8 sm:mb-16">
+        <section className="mb-8 sm:mb-16 bg-gradient-to-br from-purple-900/60 to-rose-900/60 backdrop-blur-sm p-6 rounded-lg shadow-xl border border-rose-400/30">
           <div className="text-center mb-8 sm:mb-12 animate-fade-in">
-            <h3 className="text-2xl sm:text-3xl font-bold mb-4">Tipos de Registro</h3>
-            <p className="text-sm sm:text-base text-muted-foreground max-w-2xl mx-auto px-4">
+            <h3 className="text-2xl sm:text-3xl font-bold mb-4 text-white">Tipos de Registro</h3>
+            <p className="text-sm sm:text-base text-rose-100 max-w-2xl mx-auto px-4">
               Elige el tipo de registro que mejor se adapte a ti
             </p>
           </div>
           <div className="grid md:grid-cols-2 gap-4 sm:gap-8 max-w-4xl mx-auto px-4">
-            <Card className="border-primary/20 bg-gradient-to-br from-primary/5 to-primary/10 hover:shadow-lg hover:scale-105 transition-all duration-300 animate-fade-in delay-200">
+            <Card className="border-rose-400/30 bg-gradient-to-br from-purple-800/40 to-rose-800/40 backdrop-blur-sm hover:shadow-lg hover:shadow-rose-500/25 hover:scale-105 transition-all duration-300 animate-fade-in delay-200">
               <CardHeader className="text-center p-4 sm:p-6">
-                <div className="w-12 h-12 sm:w-16 sm:h-16 bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-4 animate-pulse-glow">
-                  <Users className="h-6 w-6 sm:h-8 sm:w-8 text-primary" />
+                <div className="w-12 h-12 sm:w-16 sm:h-16 bg-rose-500/30 rounded-full flex items-center justify-center mx-auto mb-4 animate-pulse-glow">
+                  <Users className="h-6 w-6 sm:h-8 sm:w-8 text-rose-300" />
                 </div>
-                <CardTitle className="text-lg sm:text-xl">Registro en Pareja</CardTitle>
+                <CardTitle className="text-lg sm:text-xl text-white">Registro en Pareja</CardTitle>
               </CardHeader>
               <CardContent className="text-center space-y-3">
-                <p className="text-muted-foreground">
+                <p className="text-rose-100">
                   Registro conjunto para dos personas que asistirán juntas al evento
                 </p>
                 <ul className="text-sm space-y-2 text-left">
@@ -399,15 +401,15 @@ const Index = () => {
               </CardContent>
             </Card>
 
-            <Card className="border-primary/20 bg-gradient-to-br from-primary/5 to-primary/10 hover:shadow-lg hover:scale-105 transition-all duration-300 animate-fade-in delay-400">
+            <Card className="border-rose-400/30 bg-gradient-to-br from-purple-800/40 to-rose-800/40 backdrop-blur-sm hover:shadow-lg hover:shadow-rose-500/25 hover:scale-105 transition-all duration-300 animate-fade-in delay-400">
               <CardHeader className="text-center p-4 sm:p-6">
-                <div className="w-12 h-12 sm:w-16 sm:h-16 bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-4 animate-pulse-glow">
-                  <UserCheck className="h-6 w-6 sm:h-8 sm:w-8 text-primary" />
+                <div className="w-12 h-12 sm:w-16 sm:h-16 bg-purple-500/30 rounded-full flex items-center justify-center mx-auto mb-4 animate-pulse-glow">
+                  <UserCheck className="h-6 w-6 sm:h-8 sm:w-8 text-purple-300" />
                 </div>
-                <CardTitle className="text-lg sm:text-xl">Registro Individual (Single)</CardTitle>
+                <CardTitle className="text-lg sm:text-xl text-white">Registro Individual (Single)</CardTitle>
               </CardHeader>
               <CardContent className="text-center space-y-3">
-                <p className="text-muted-foreground">
+                <p className="text-rose-100">
                   Registro personal para una sola persona
                 </p>
                 <ul className="text-sm space-y-2 text-left">
@@ -430,42 +432,42 @@ const Index = () => {
         </section>
 
         {/* Features Grid */}
-        <section className="mb-8 sm:mb-16 px-4">
-          <h3 className="text-2xl sm:text-3xl font-bold text-center mb-8 sm:mb-12 animate-fade-in">¿Cómo Funciona?</h3>
+        <section className="mb-8 sm:mb-16 px-4 bg-gradient-to-br from-purple-900/60 to-rose-900/60 backdrop-blur-sm p-6 rounded-lg shadow-xl border border-rose-400/30">
+          <h3 className="text-2xl sm:text-3xl font-bold text-center mb-8 sm:mb-12 animate-fade-in text-white">¿Cómo Funciona?</h3>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-            <Card className="text-center hover:scale-105 transition-transform duration-300 animate-fade-in delay-200">
+            <Card className="text-center hover:scale-105 transition-transform duration-300 animate-fade-in delay-200 border-rose-400/30 bg-gradient-to-br from-purple-800/40 to-rose-800/40 backdrop-blur-sm hover:shadow-lg hover:shadow-rose-500/25">
               <CardHeader className="p-4 sm:p-6">
-                <Calendar className="h-10 w-10 sm:h-12 sm:w-12 text-primary mx-auto mb-4 animate-float" />
-                <CardTitle className="text-lg sm:text-xl">Eventos Disponibles</CardTitle>
+                <Calendar className="h-10 w-10 sm:h-12 sm:w-12 text-rose-300 mx-auto mb-4 animate-float" />
+                <CardTitle className="text-lg sm:text-xl text-white">Eventos Disponibles</CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-muted-foreground">
+                <p className="text-rose-100">
                   Consulta todos los eventos disponibles del club con fechas, 
                   horarios y capacidad en tiempo real.
                 </p>
               </CardContent>
             </Card>
 
-            <Card className="text-center hover:scale-105 transition-transform duration-300 animate-fade-in delay-400">
+            <Card className="text-center hover:scale-105 transition-transform duration-300 animate-fade-in delay-400 border-rose-400/30 bg-gradient-to-br from-purple-800/40 to-rose-800/40 backdrop-blur-sm hover:shadow-lg hover:shadow-rose-500/25">
               <CardHeader className="p-4 sm:p-6">
-                <Clock className="h-10 w-10 sm:h-12 sm:w-12 text-primary mx-auto mb-4 animate-float delay-500" />
-                <CardTitle className="text-lg sm:text-xl">Reserva Tu Lugar</CardTitle>
+                <Clock className="h-10 w-10 sm:h-12 sm:w-12 text-purple-300 mx-auto mb-4 animate-float delay-500" />
+                <CardTitle className="text-lg sm:text-xl text-white">Reserva Tu Lugar</CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-muted-foreground">
+                <p className="text-rose-100">
                   Selecciona el horario que prefieras y reserva tu lugar.
                   El sistema controla automáticamente la capacidad.
                 </p>
               </CardContent>
             </Card>
 
-            <Card className="text-center hover:scale-105 transition-transform duration-300 animate-fade-in delay-600">
+            <Card className="text-center hover:scale-105 transition-transform duration-300 animate-fade-in delay-600 border-rose-400/30 bg-gradient-to-br from-purple-800/40 to-rose-800/40 backdrop-blur-sm hover:shadow-lg hover:shadow-rose-500/25">
               <CardHeader className="p-4 sm:p-6">
-                <QrCode className="h-10 w-10 sm:h-12 sm:w-12 text-primary mx-auto mb-4 animate-float delay-1000" />
-                <CardTitle className="text-lg sm:text-xl">Acceso con QR</CardTitle>
+                <QrCode className="h-10 w-10 sm:h-12 sm:w-12 text-fuchsia-300 mx-auto mb-4 animate-float delay-1000" />
+                <CardTitle className="text-lg sm:text-xl text-white">Acceso con QR</CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-muted-foreground">
+                <p className="text-rose-100">
                   Recibe tu código QR único para acceder al evento.
                   Presenta tu código en la entrada para registro.
                 </p>

@@ -8,23 +8,23 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --background: linear-gradient(135deg, hsl(340 30% 8%), hsl(350 25% 12%), hsl(0 20% 10%));
+    --foreground: 350 15% 85%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card: linear-gradient(135deg, hsl(340 25% 12% / 0.9), hsl(350 20% 15% / 0.8));
+    --card-foreground: 350 15% 85%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover: linear-gradient(135deg, hsl(340 30% 10%), hsl(350 25% 14%));
+    --popover-foreground: 350 15% 85%;
 
-    --primary: 350 85% 45%;
+    --primary: 350 85% 55%;
     --primary-foreground: 0 0% 98%;
     
-    --primary-glow: 350 90% 60%;
-    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-glow)));
-    --gradient-hero: linear-gradient(135deg, hsl(350 85% 25% / 0.9), hsl(350 75% 35% / 0.8));
-    --gradient-sensual: linear-gradient(135deg, hsl(350 85% 15% / 0.3), hsl(10 80% 25% / 0.2), hsl(350 90% 30% / 0.4));
-    --shadow-glow: 0 0 40px hsl(var(--primary-glow) / 0.3);
+    --primary-glow: 350 95% 65%;
+    --gradient-primary: linear-gradient(135deg, hsl(350 85% 45%), hsl(350 95% 65%), hsl(10 80% 50%));
+    --gradient-hero: linear-gradient(135deg, hsl(340 60% 15% / 0.95), hsl(350 70% 20% / 0.9), hsl(0 50% 25% / 0.85));
+    --gradient-sensual: linear-gradient(135deg, hsl(340 80% 25% / 0.6), hsl(350 85% 35% / 0.5), hsl(10 75% 40% / 0.7));
+    --shadow-glow: 0 0 50px hsl(350 95% 65% / 0.4), 0 0 100px hsl(350 85% 55% / 0.2);
 
     --secondary: 210 40% 96.1%;
     --secondary-foreground: 222.2 47.4% 11.2%;
@@ -62,23 +62,23 @@ All colors MUST be HSL.
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
+    --background: linear-gradient(135deg, hsl(340 40% 5%), hsl(350 35% 8%), hsl(0 30% 6%));
+    --foreground: 350 20% 90%;
 
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
+    --card: linear-gradient(135deg, hsl(340 35% 8% / 0.95), hsl(350 30% 12% / 0.9));
+    --card-foreground: 350 20% 90%;
 
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
+    --popover: linear-gradient(135deg, hsl(340 40% 6%), hsl(350 35% 10%));
+    --popover-foreground: 350 20% 90%;
 
     --primary: 350 90% 65%;
-    --primary-foreground: 222.2 47.4% 11.2%;
+    --primary-foreground: 340 30% 10%;
     
     --primary-glow: 350 95% 75%;
-    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-glow)));
-    --gradient-hero: linear-gradient(135deg, hsl(var(--primary) / 0.9), hsl(350 75% 45% / 0.8));
-    --gradient-sensual: linear-gradient(135deg, hsl(350 85% 25% / 0.4), hsl(10 80% 35% / 0.3), hsl(350 90% 40% / 0.5));
-    --shadow-glow: 0 0 40px hsl(var(--primary-glow) / 0.3);
+    --gradient-primary: linear-gradient(135deg, hsl(350 90% 55%), hsl(350 95% 75%), hsl(10 85% 60%));
+    --gradient-hero: linear-gradient(135deg, hsl(340 70% 12% / 0.98), hsl(350 80% 18% / 0.95), hsl(0 60% 22% / 0.92));
+    --gradient-sensual: linear-gradient(135deg, hsl(340 85% 20% / 0.8), hsl(350 90% 30% / 0.7), hsl(10 80% 35% / 0.9));
+    --shadow-glow: 0 0 60px hsl(350 95% 75% / 0.5), 0 0 120px hsl(350 90% 65% / 0.3);
 
     --secondary: 217.2 32.6% 17.5%;
     --secondary-foreground: 210 40% 98%;
@@ -112,6 +112,39 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    background: var(--background);
+    color: hsl(var(--foreground));
+    min-height: 100vh;
+    position: relative;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--gradient-sensual);
+    z-index: -1;
+    opacity: 0.3;
+  }
+
+  .card {
+    background: var(--card);
+    backdrop-filter: blur(10px);
+    border: 1px solid hsl(350 30% 25% / 0.3);
+    box-shadow: var(--shadow-glow), 0 8px 32px hsl(340 50% 10% / 0.4);
+  }
+
+  .btn-primary {
+    background: var(--gradient-primary);
+    box-shadow: var(--shadow-glow);
+    transition: all 0.3s ease;
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-glow), 0 12px 24px hsl(350 80% 30% / 0.4);
   }
 }

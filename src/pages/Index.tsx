@@ -23,6 +23,7 @@ import {
   Sparkles
 } from "lucide-react";
 import type { User, Session } from "@supabase/supabase-js";
+import Logo from "@/components/ui/Logo";
 
 const Index = () => {
   const [user, setUser] = useState<User | null>(null);
@@ -103,12 +104,15 @@ const Index = () => {
       <Dialog open={showWelcomeModal} onOpenChange={setShowWelcomeModal}>
         <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto bg-slate-900/95 border-rose-500/30 text-rose-100">
           <DialogHeader className="text-center">
-            <div className="flex items-center justify-center mb-4">
-              <Heart className="h-8 w-8 text-rose-400 mr-2 animate-pulse" />
-              <DialogTitle className="text-2xl sm:text-3xl bg-gradient-to-r from-rose-400 via-red-400 to-rose-300 bg-clip-text text-transparent">
-                ¡Bienvenido a karoVicious Toluca!
-              </DialogTitle>
-              <Sparkles className="h-8 w-8 text-rose-400 ml-2 animate-pulse" />
+            <div className="flex flex-col items-center justify-center mb-6">
+              <Logo size="lg" className="mb-4" />
+              <div className="flex items-center">
+                <Heart className="h-8 w-8 text-rose-400 mr-2 animate-pulse" />
+                <DialogTitle className="text-2xl sm:text-3xl bg-gradient-to-r from-rose-400 via-red-400 to-rose-300 bg-clip-text text-transparent">
+                  ¡Bienvenido a KaroVicious!
+                </DialogTitle>
+                <Sparkles className="h-8 w-8 text-rose-400 ml-2 animate-pulse" />
+              </div>
             </div>
             <DialogDescription className="text-rose-200 text-lg">
               Tu plataforma exclusiva para eventos únicos y experiencias sensuales
@@ -233,15 +237,10 @@ const Index = () => {
         <div className="absolute bottom-40 right-1/4 w-12 h-12 sm:w-24 sm:h-24 bg-red-800/10 rounded-full blur-2xl animate-float delay-1000"></div>
       </div>
       {/* Header */}
-      <header className="border-b border-rose-500/20 bg-slate-900/95 backdrop-blur-sm sticky top-0 z-50 relative animate-fade-in">
+      <header className="border-b border-rose-500/20 bg-slate-900/95 backdrop-blur-sm sticky top-0 z-50 animate-fade-in">
         <div className="container mx-auto px-2 sm:px-4 py-3 sm:py-4">
           <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-2">
-              <Calendar className="h-6 w-6 sm:h-8 sm:w-8 text-rose-400 animate-float" />
-              <h1 className="text-lg sm:text-2xl font-bold bg-gradient-to-r from-rose-400 via-red-400 to-rose-300 bg-clip-text text-transparent">
-                karoVicious Toluca
-              </h1>
-            </div>
+            <Logo size="md" className="hover:scale-105 transition-transform duration-300" />
             
             {user ? (
               <div className="flex items-center space-x-2 sm:space-x-4">
@@ -774,11 +773,9 @@ const Index = () => {
       {/* Footer */}
       <footer className="border-t bg-gradient-to-r from-primary/10 to-primary/5 mt-16 relative">
         <div className="container mx-auto px-4 py-12 text-center">
-          <div className="mb-6">
-            <h4 className="text-2xl font-bold bg-gradient-to-r from-primary to-primary-glow bg-clip-text text-transparent mb-2">
-              karoVicious Toluca
-            </h4>
-            <p className="text-muted-foreground">Edo. México</p>
+          <div className="mb-6 flex flex-col items-center">
+            <Logo size="md" className="mb-4" />
+            <p className="text-muted-foreground">Estado de México</p>
           </div>
           <div className="text-sm text-muted-foreground space-y-2">
             <p>© 2024 karoVicious Toluca - Sistema de Gestión de Eventos</p>

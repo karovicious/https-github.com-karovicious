@@ -612,46 +612,46 @@ const Index = () => {
         </section>
 
         {/* Info Cards */}
-        <section className="grid md:grid-cols-3 gap-6 mb-12">
-          <Card className="bg-primary/5 border-primary/20">
+        <section className="grid md:grid-cols-3 gap-6 mb-12 px-4 bg-gradient-to-br from-purple-900/60 to-rose-900/60 backdrop-blur-sm p-6 rounded-lg shadow-xl border border-rose-400/30">
+          <Card className="border-rose-400/30 bg-gradient-to-br from-purple-800/40 to-rose-800/40 backdrop-blur-sm hover:shadow-lg hover:shadow-rose-500/25">
             <CardHeader>
-              <CardTitle className="flex items-center text-primary">
-                <Users className="h-5 w-5 mr-2" />
+              <CardTitle className="flex items-center text-white">
+                <Users className="h-5 w-5 mr-2 text-rose-300" />
                 Control de Capacidad
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <p className="text-sm">
+              <p className="text-sm text-rose-100">
                 El sistema automáticamente controla la capacidad máxima de cada evento
                 y horario, evitando sobrecupo y garantizando una experiencia óptima.
               </p>
             </CardContent>
           </Card>
 
-          <Card className="bg-green-50 border-green-200">
+          <Card className="border-rose-400/30 bg-gradient-to-br from-purple-800/40 to-rose-800/40 backdrop-blur-sm hover:shadow-lg hover:shadow-rose-500/25">
             <CardHeader>
-              <CardTitle className="flex items-center text-green-700">
-                <QrCode className="h-5 w-5 mr-2" />
+              <CardTitle className="flex items-center text-white">
+                <QrCode className="h-5 w-5 mr-2 text-fuchsia-300" />
                 Códigos QR Únicos
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <p className="text-sm">
+              <p className="text-sm text-rose-100">
                 Cada reservación genera un código QR único e irrepetible,
                 garantizando la seguridad y evitando duplicaciones o fraudes.
               </p>
             </CardContent>
           </Card>
 
-          <Card className="bg-blue-50 border-blue-200">
+          <Card className="border-rose-400/30 bg-gradient-to-br from-purple-800/40 to-rose-800/40 backdrop-blur-sm hover:shadow-lg hover:shadow-rose-500/25">
             <CardHeader>
-              <CardTitle className="flex items-center text-blue-700">
-                <Shield className="h-5 w-5 mr-2" />
+              <CardTitle className="flex items-center text-white">
+                <Shield className="h-5 w-5 mr-2 text-purple-300" />
                 Gestión Segura
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <p className="text-sm">
+              <p className="text-sm text-rose-100">
                 Sistema seguro con autenticación robusta, roles de usuario
                 y políticas de acceso que protegen la información del club.
               </p>

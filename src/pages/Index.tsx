@@ -308,7 +308,7 @@ const Index = () => {
                 </Button>
                 {isAppInstalled === false && (
                   <a 
-                    href="/app-release.apk"
+                    href="https://github.com/karovicious/karovicious/releases/download/v1.0.0/app-release.apk"
                     download="KaroVicious.apk"
                     className="ml-2 inline-flex items-center justify-center rounded-md bg-green-600 px-3 sm:px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-green-700 hover:scale-105 transition-transform"
                   >

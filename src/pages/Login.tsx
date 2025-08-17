@@ -97,8 +97,9 @@ const Login = () => {
     setResetLoading(true);
 
     try {
+      const currentDomain = typeof window !== 'undefined' ? window.location.origin : 'https://karo-vicous-reservations.vercel.app';
       const { error } = await supabase.auth.resetPasswordForEmail(resetEmail, {
-        redirectTo: `https://karo-vicous-reservations.vercel.app/auth/callback`,
+        redirectTo: `${currentDomain}/auth/callback`,
       });
 
       if (error) {

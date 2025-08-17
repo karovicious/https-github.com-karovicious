@@ -25,12 +25,15 @@ export const signInWithRedirect = async (email: string, password: string) => {
 };
 
 export const signUpWithRedirect = async (email: string, password: string, options?: Record<string, unknown>) => {
+  // Get current domain dynamically for development and production
+  const currentDomain = typeof window !== 'undefined' ? window.location.origin : 'https://karo-vicous-reservations.vercel.app';
+  
   return await supabase.auth.signUp({
     email,
     password,
     options: {
       ...options,
-      emailRedirectTo: `https://karo-vicous-reservations.vercel.app/auth/callback`,
+      emailRedirectTo: `${currentDomain}/auth/callback`,
     }
   });
 };

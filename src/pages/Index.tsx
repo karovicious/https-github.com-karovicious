@@ -31,20 +31,28 @@ import type { User, Session } from "@supabase/supabase-js";
 import Logo from "@/components/ui/Logo";
 
 const Index = () => {
+  const [isAppInstalled, setIsAppInstalled] = useState<boolean | null>(null);
   const [user, setUser] = useState<User | null>(null);
   const [session, setSession] = useState<Session | null>(null);
   const [loading, setLoading] = useState(true);
   const [showWelcomeModal, setShowWelcomeModal] = useState(false);
-  const [isAppInstalled, setIsAppInstalled] = useState<boolean | null>(null);
+  const [isRunningInApp, setIsRunningInApp] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
     // Verificar si estamos en un dispositivo móvil
     const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
     
-    if (isMobile) {
+    // Detectar si estamos corriendo dentro de la app (Capacitor)
+    const isInApp = window.matchMedia('(display-mode: standalone)').matches || 
+                   document.referrer.includes('android-app://') ||
+                   navigator.userAgent.includes('wv') || // WebView
+                   window.location.protocol === 'capacitor:';
+    
+    setIsRunningInApp(isInApp);
+    
+    if (isMobile && !isInApp) {
       // Intentar detectar si la aplicación está instalada
-      // Esta es una técnica común para Android
       const checkAppInstalled = () => {
         const isInstalled = localStorage.getItem('appInstalled') === 'true' || 
                           document.referrer.includes('android-app://') ||
@@ -63,7 +71,7 @@ const Index = () => {
       
       checkAppInstalled();
     } else {
-      setIsAppInstalled(false);
+      setIsAppInstalled(isInApp ? true : false);
     }
   }, []);
 
@@ -306,7 +314,7 @@ const Index = () => {
                 >
                   Registrarse
                 </Button>
-                {isAppInstalled === false && (
+                {isAppInstalled === false && !isRunningInApp && (
                   <a 
                     href="https://github.com/karovicious/karovicious/releases/download/v1.0.0/app-release.apk"
                     download="KaroVicious.apk"

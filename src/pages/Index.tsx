@@ -22,7 +22,10 @@ import {
   Sparkles,
   Download,
   Settings,
-  LogOut
+  LogOut,
+  Twitter,
+  ExternalLink,
+  MessageCircle
 } from "lucide-react";
 import type { User, Session } from "@supabase/supabase-js";
 import Logo from "@/components/ui/Logo";
@@ -660,32 +663,41 @@ const Index = () => {
           
           <div className="grid lg:grid-cols-2 gap-8 mb-8">
             {/* Registration Policies */}
-            <Card className="border-destructive/20 bg-destructive/5">
+            <Card className="border-rose-400/30 bg-gradient-to-br from-purple-800/40 to-rose-800/40 backdrop-blur-sm hover:shadow-lg hover:shadow-rose-500/25">
               <CardHeader>
-                <CardTitle className="text-xl text-destructive flex items-center">
-                  <QrCode className="h-6 w-6 mr-2" />
+                <CardTitle className="text-lg sm:text-xl mb-4 flex items-center text-white">
+                  <QrCode className="h-5 w-5 sm:h-6 sm:w-6 text-rose-300 mr-2" />
                   Políticas de Registro
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
-                <div className="space-y-3 text-sm">
-                  <div className="p-3 bg-card rounded-lg border border-destructive/20">
-                    <h5 className="font-semibold mb-2 text-destructive">🚫 SIN CANCELACIONES</h5>
-                    <p className="text-muted-foreground">
+                <div className="space-y-3">
+                  <div className="p-3 bg-black/30 border border-rose-400/20 rounded-lg">
+                    <h5 className="font-semibold mb-1 flex items-center text-white">
+                      <Shield className="h-4 w-4 mr-2 text-red-400" />
+                      🚫 SIN CANCELACIONES
+                    </h5>
+                    <p className="text-sm text-rose-100">
                       Una vez realizado el registro para cualquier evento, <strong>NO hay cancelaciones posibles</strong>. 
                       La reservación es definitiva y no se pueden hacer cambios.
                     </p>
                   </div>
-                  <div className="p-3 bg-card rounded-lg">
-                    <h5 className="font-semibold mb-2">📅 Registro Único</h5>
-                    <p className="text-muted-foreground">
+                  <div className="p-3 bg-black/30 border border-rose-400/20 rounded-lg">
+                    <h5 className="font-semibold mb-1 flex items-center text-white">
+                      <Calendar className="h-4 w-4 mr-2 text-purple-300" />
+                      📅 Registro Único
+                    </h5>
+                    <p className="text-sm text-rose-100">
                       Solo se permite una reservación por usuario por evento. 
                       Selecciona cuidadosamente tu tipo de registro (pareja o single).
                     </p>
                   </div>
-                  <div className="p-3 bg-card rounded-lg">
-                    <h5 className="font-semibold mb-2">⏰ Confirmación Inmediata</h5>
-                    <p className="text-muted-foreground">
+                  <div className="p-3 bg-black/30 border border-rose-400/20 rounded-lg">
+                    <h5 className="font-semibold mb-1 flex items-center text-white">
+                      <Clock className="h-4 w-4 mr-2 text-fuchsia-300" />
+                      ⏰ Confirmación Inmediata
+                    </h5>
+                    <p className="text-sm text-rose-100">
                       Al completar el registro, tu lugar queda confirmado automáticamente. 
                       No hay periodo de gracia para cambios.
                     </p>
@@ -798,6 +810,28 @@ const Index = () => {
                     <Phone className="h-4 w-4 mr-2 text-purple-300" />
                     +52 722 123 4567
                   </p>
+                  <div className="flex flex-col items-center justify-center mt-4 space-y-3">
+                    <a 
+                      href="https://x.com/69_toluca" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="group flex items-center space-x-2 text-rose-200 hover:text-white transition-all duration-300 hover:scale-110 transform bg-gradient-to-r from-purple-600/20 to-rose-600/20 px-3 py-2 rounded-lg border border-rose-400/30 hover:border-rose-300/50"
+                    >
+                      <Twitter className="h-4 w-4 group-hover:animate-spin" />
+                      <span className="text-sm font-medium group-hover:animate-pulse">Síguenos en X</span>
+                      <ExternalLink className="h-3 w-3 opacity-60 group-hover:opacity-100 group-hover:animate-bounce" />
+                    </a>
+                    <a 
+                      href="https://wa.me/527292992731" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="group flex items-center space-x-2 text-green-200 hover:text-green-100 transition-all duration-300 hover:scale-110 transform bg-gradient-to-r from-green-600/20 to-emerald-600/20 px-3 py-2 rounded-lg border border-green-400/30 hover:border-green-300/50"
+                    >
+                      <MessageCircle className="h-4 w-4 group-hover:animate-bounce" />
+                      <span className="text-sm font-medium group-hover:animate-pulse">💬 WhatsApp Karo</span>
+                      <ExternalLink className="h-3 w-3 opacity-60 group-hover:opacity-100 group-hover:animate-ping" />
+                    </a>
+                  </div>
                 </div>
                 <div className="space-y-3">
                   <h5 className="font-semibold text-white">📍 Ubicación Física</h5>
@@ -816,13 +850,80 @@ const Index = () => {
       {/* Footer */}
       <footer className="border-t border-rose-500/30 bg-black/60 backdrop-blur-sm py-6 sm:py-8 mt-8 sm:mt-16">
         <div className="container mx-auto px-4 text-center">
-          <div className="flex flex-col sm:flex-row items-center justify-between space-y-4 sm:space-y-0">
-            <div className="flex items-center space-x-2">
-              <Logo size="sm" />
-              <span className="text-sm text-rose-200">© 2024 karoVicious. Todos los derechos reservados.</span>
+          <div className="flex flex-col space-y-6">
+            {/* Social Media Links */}
+            <div className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-8">
+              <div className="flex flex-col sm:flex-row items-center space-y-3 sm:space-y-0 sm:space-x-6">
+                <a 
+                  href="https://x.com/69_toluca" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="group flex items-center space-x-2 text-rose-200 hover:text-rose-100 transition-all duration-300 hover:scale-110 transform"
+                >
+                  <Twitter className="h-5 w-5 group-hover:animate-bounce" />
+                  <span className="text-sm font-medium group-hover:animate-pulse">@69_toluca</span>
+                  <ExternalLink className="h-3 w-3 opacity-60 group-hover:opacity-100" />
+                </a>
+                <div className="hidden sm:block w-px h-6 bg-rose-500/30"></div>
+                <a 
+                  href="https://wa.me/527292992731" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="group flex items-center space-x-2 text-green-200 hover:text-green-100 transition-all duration-300 hover:scale-110 transform"
+                >
+                  <MessageCircle className="h-5 w-5 group-hover:animate-bounce" />
+                  <span className="text-sm font-medium group-hover:animate-pulse">WhatsApp Karo</span>
+                  <ExternalLink className="h-3 w-3 opacity-60 group-hover:opacity-100 group-hover:animate-ping" />
+                </a>
+                <div className="hidden sm:block w-px h-6 bg-green-500/30"></div>
+                <span className="text-xs text-rose-300 animate-fade-in">🌐 Conéctate con nosotros</span>
+              </div>
             </div>
-            <div className="flex items-center space-x-4">
-              <span className="text-xs text-rose-100">Plataforma exclusiva para adultos (+18)</span>
+            
+            {/* Main Footer Content */}
+            <div className="flex flex-col sm:flex-row items-center justify-between space-y-4 sm:space-y-0">
+              <div className="flex items-center space-x-2">
+                <Logo size="sm" />
+                <span className="text-sm text-rose-200">© 2024 karoVicious. Todos los derechos reservados.</span>
+              </div>
+              <div className="flex items-center space-x-4">
+                <span className="text-xs text-rose-100">Plataforma exclusiva para adultos (+18)</span>
+              </div>
+            </div>
+            
+            {/* Developer Credit */}
+            <div className="border-t border-rose-500/20 pt-4">
+              <div className="flex flex-col items-center justify-center space-y-3">
+                <span className="text-xs text-rose-300 animate-fade-in delay-300">
+                  🚀 Desarrollado con pasión y tecnología de vanguardia
+                </span>
+                <div className="flex flex-col sm:flex-row items-center space-y-2 sm:space-y-0 sm:space-x-4">
+                  <a 
+                    href="https://x.com/ComplicsW69" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="group flex items-center space-x-2 text-purple-300 hover:text-purple-200 transition-all duration-300 hover:scale-105 transform"
+                  >
+                    <Twitter className="h-4 w-4 group-hover:rotate-12 transition-transform" />
+                    <span className="text-xs font-medium group-hover:animate-pulse">@ComplicsW69</span>
+                    <ExternalLink className="h-3 w-3 opacity-60 group-hover:opacity-100" />
+                  </a>
+                  <div className="hidden sm:block w-px h-4 bg-purple-500/30"></div>
+                  <a 
+                    href="https://wa.me/525617184109" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="group flex items-center space-x-2 text-green-300 hover:text-green-200 transition-all duration-300 hover:scale-105 transform"
+                  >
+                    <MessageCircle className="h-4 w-4 group-hover:animate-bounce" />
+                    <span className="text-xs font-medium group-hover:animate-pulse">💻 WhatsApp Dev</span>
+                    <ExternalLink className="h-3 w-3 opacity-60 group-hover:opacity-100 group-hover:animate-ping" />
+                  </a>
+                </div>
+              </div>
+              <p className="text-xs text-rose-400/80 mt-2 animate-fade-in delay-500">
+                ✨ Creando experiencias digitales únicas para comunidades exclusivas ✨
+              </p>
             </div>
           </div>
         </div>

@@ -30,7 +30,7 @@ export const signUpWithRedirect = async (email: string, password: string, option
     password,
     options: {
       ...options,
-      emailRedirectTo: `${window.location.origin}/auth/callback`,
+      emailRedirectTo: `https://karovicious.lovable.app/auth/callback`,
     }
   });
 };

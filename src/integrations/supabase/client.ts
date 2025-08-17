@@ -30,7 +30,7 @@ export const signUpWithRedirect = async (email: string, password: string, option
     password,
     options: {
       ...options,
-      emailRedirectTo: `https://karovicious.lovable.app/auth/callback`,
+      emailRedirectTo: `https://karo-vicous-reservations.vercel.app/auth/callback`,
     }
   });
 };

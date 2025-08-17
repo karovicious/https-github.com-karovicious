@@ -325,9 +325,9 @@ const Index = () => {
           <div className="max-w-4xl mx-auto animate-fade-in bg-gradient-to-br from-purple-900/80 to-rose-900/80 backdrop-blur-sm p-6 rounded-lg shadow-xl border border-rose-400/30">
             <div className="mb-6 sm:mb-8">
               <h2 className="text-3xl sm:text-5xl md:text-7xl font-bold mb-4 bg-gradient-to-r from-rose-400 via-red-400 to-rose-300 bg-clip-text text-transparent animate-pulse-glow">
-                karoVicious Toluca
+                Karo Vicious69
               </h2>
-              <p className="text-base sm:text-lg text-rose-200 mb-2 animate-fade-in delay-200">Edo. México</p>
+              <p className="text-base sm:text-lg text-rose-200 mb-2 animate-fade-in delay-200">Toluca Edo Mex.</p>
               <div className="w-16 sm:w-24 h-1 bg-gradient-to-r from-rose-400 to-red-400 mx-auto rounded-full mb-4 sm:mb-6 animate-fade-in delay-300"></div>
             </div>
             
@@ -340,16 +340,6 @@ const Index = () => {
             </p>
             
             {/* Club Location */}
-            <div className="bg-gradient-to-r from-rose-800/50 to-purple-800/50 border border-rose-400/40 rounded-xl p-4 sm:p-6 mb-6 sm:mb-8 max-w-2xl mx-auto shadow-lg shadow-rose-500/20 animate-fade-in delay-600 hover:scale-105 transition-transform duration-300">
-              <div className="flex items-center justify-center mb-4">
-                <MapPin className="h-5 w-5 sm:h-6 sm:w-6 text-rose-300 mr-2 animate-pulse" />
-                <h4 className="text-base sm:text-lg font-semibold text-white">Ubicación del Club</h4>
-              </div>
-              <p className="text-sm sm:text-base text-rose-100 text-center leading-relaxed">
-                P.º Cristóbal Colón 725, Moderna de la Cruz<br />
-                50180 Toluca de Lerdo, Estado de México
-              </p>
-            </div>
             {!user && (
               <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center animate-fade-in delay-700">
                 <Button size="lg" className="text-base sm:text-lg px-6 sm:px-8 hover:scale-105 transition-transform duration-300 shadow-lg bg-gradient-to-r from-rose-600 to-purple-600 text-white hover:from-rose-700 hover:to-purple-700 shadow-rose-500/25" onClick={() => navigate("/login")}>

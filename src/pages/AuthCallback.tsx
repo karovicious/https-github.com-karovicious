@@ -45,9 +45,12 @@ const AuthCallback = () => {
               title: "¡Email confirmado!",
               description: "Tu cuenta ha sido verificada exitosamente.",
             });
-            // Clean the URL hash
+            // Clean the URL hash and redirect immediately
             window.history.replaceState(null, '', window.location.pathname);
-            setTimeout(() => navigate('/'), 2000);
+            // Force page reload to ensure session is properly established
+            setTimeout(() => {
+              window.location.href = '/';
+            }, 1500);
             return;
           }
         }

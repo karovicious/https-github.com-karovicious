@@ -8,20 +8,21 @@ import { supabase } from "@/integrations/supabase/client";
 import { toast } from "@/hooks/use-toast";
 import { 
   Calendar, 
-  Clock, 
-  Users, 
-  QrCode, 
   CheckCircle, 
-  Shield, 
+  Clock, 
+  Info, 
+  Mail, 
   MapPin, 
-  Mail,
-  LogOut,
-  UserCheck,
-  Settings,
-  Info,
+  Phone, 
+  QrCode, 
+  Shield, 
+  UserCheck, 
+  Users,
   Heart,
   Sparkles,
-  Download
+  Download,
+  Settings,
+  LogOut
 } from "lucide-react";
 import type { User, Session } from "@supabase/supabase-js";
 import Logo from "@/components/ui/Logo";
@@ -704,14 +705,14 @@ const Index = () => {
             </Card>
 
             {/* Terms and Conditions */}
-            <Card className="border-primary/20">
+            <Card className="border-rose-400/30 bg-gradient-to-br from-purple-800/40 to-rose-800/40 backdrop-blur-sm hover:shadow-lg hover:shadow-rose-500/25">
               <CardHeader>
                 <CardTitle className="text-lg sm:text-xl mb-4 flex items-center text-white">
                   <Shield className="h-5 w-5 sm:h-6 sm:w-6 text-rose-300 mr-2" />
                   Términos y Condiciones
                 </CardTitle>
                 <CardDescription className="space-y-4">
-                  <div className="p-3 bg-muted/50 rounded-lg">
+                  <div className="p-3 bg-black/30 border border-rose-400/20 rounded-lg">
                     <h5 className="font-semibold mb-1 flex items-center text-white">
                       <Info className="h-4 w-4 mr-2 text-rose-300" />
                       📋 Datos Requeridos
@@ -724,7 +725,7 @@ const Index = () => {
                     </p>
                   </div>
                   
-                  <div className="p-3 bg-muted/50 rounded-lg">
+                  <div className="p-3 bg-black/30 border border-rose-400/20 rounded-lg">
                     <h5 className="font-semibold mb-1 flex items-center text-white">
                       <Shield className="h-4 w-4 mr-2 text-purple-300" />
                       💰 Política de Pagos
@@ -735,7 +736,7 @@ const Index = () => {
                     </p>
                   </div>
                   
-                  <div className="p-3 bg-muted/50 rounded-lg">
+                  <div className="p-3 bg-black/30 border border-rose-400/20 rounded-lg">
                     <h5 className="font-semibold mb-1 flex items-center text-white">
                       <QrCode className="h-4 w-4 mr-2 text-fuchsia-300" />
                       🆔 Acceso al Evento
@@ -751,32 +752,32 @@ const Index = () => {
           </div>
 
           {/* Additional Rules */}
-          <Card className="bg-card border-border">
+          <Card className="border-rose-400/30 bg-gradient-to-br from-purple-800/40 to-rose-800/40 backdrop-blur-sm hover:shadow-lg hover:shadow-rose-500/25">
             <CardHeader>
-              <CardTitle className="text-xl flex items-center justify-center">
-                <Users className="h-6 w-6 mr-2" />
+              <CardTitle className="text-xl flex items-center justify-center text-white">
+                <Users className="h-6 w-6 mr-2 text-rose-300" />
                 Reglas Adicionales del Club
               </CardTitle>
             </CardHeader>
             <CardContent>
               <div className="grid md:grid-cols-3 gap-6 text-sm">
                 <div className="text-center">
-                  <h5 className="font-semibold mb-2">👔 Código de Vestimenta</h5>
-                  <p className="text-muted-foreground">
+                  <h5 className="font-semibold mb-2 text-white">👔 Código de Vestimenta</h5>
+                  <p className="text-rose-100">
                     Vestimenta apropiada requerida según el tipo de evento. 
                     Consulta los detalles específicos en cada evento.
                   </p>
                 </div>
                 <div className="text-center">
-                  <h5 className="font-semibold mb-2">🔞 Restricciones de Edad</h5>
-                  <p className="text-muted-foreground">
+                  <h5 className="font-semibold mb-2 text-white">🔞 Restricciones de Edad</h5>
+                  <p className="text-rose-100">
                     Algunos eventos pueden tener restricciones de edad. 
                     Verificación de ID requerida en la entrada.
                   </p>
                 </div>
                 <div className="text-center">
-                  <h5 className="font-semibold mb-2">📱 Uso del Código QR</h5>
-                  <p className="text-muted-foreground">
+                  <h5 className="font-semibold mb-2 text-white">📱 Uso del Código QR</h5>
+                  <p className="text-rose-100">
                     El código QR es personal e intransferible. 
                     Compartirlo con terceros puede resultar en denegación de acceso.
                   </p>
@@ -787,29 +788,30 @@ const Index = () => {
         </section>
 
         {/* Contact Info */}
-        <section className="text-center">
-          <Card className="max-w-2xl mx-auto">
+        <section className="text-center mb-8 sm:mb-16 px-4 bg-gradient-to-br from-purple-900/60 to-rose-900/60 backdrop-blur-sm p-6 rounded-lg shadow-xl border border-rose-400/30">
+          <Card className="max-w-2xl mx-auto border-rose-400/30 bg-gradient-to-br from-purple-800/40 to-rose-800/40 backdrop-blur-sm hover:shadow-lg hover:shadow-rose-500/25">
             <CardHeader>
-              <CardTitle className="flex items-center justify-center text-2xl">
-                <MapPin className="h-6 w-6 mr-2" />
+              <CardTitle className="flex items-center justify-center text-2xl text-white">
+                <MapPin className="h-6 w-6 mr-2 text-rose-300" />
                 Información de Contacto
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-6">
               <div className="grid md:grid-cols-2 gap-6 text-sm">
                 <div className="space-y-3">
-                  <h5 className="font-semibold">📧 Contacto Digital</h5>
-                  <p className="flex items-center justify-center">
-                    <Mail className="h-4 w-4 mr-2" />
+                  <h5 className="font-semibold text-white">📧 Contacto Digital</h5>
+                  <p className="flex items-center justify-center text-rose-100">
+                    <Mail className="h-4 w-4 mr-2 text-rose-300" />
                     contacto@karovicious.com
                   </p>
-                  <p className="text-muted-foreground">
-                    Para soporte técnico y consultas sobre eventos
+                  <p className="flex items-center justify-center text-rose-100">
+                    <Phone className="h-4 w-4 mr-2 text-purple-300" />
+                    +52 722 123 4567
                   </p>
                 </div>
                 <div className="space-y-3">
-                  <h5 className="font-semibold">📍 Ubicación Física</h5>
-                  <div className="text-muted-foreground">
+                  <h5 className="font-semibold text-white">📍 Ubicación Física</h5>
+                  <div className="text-center text-rose-100">
                     <p>P.º Cristóbal Colón 725</p>
                     <p>Moderna de la Cruz</p>
                     <p>50180 Toluca de Lerdo, Méx.</p>

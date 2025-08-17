@@ -13,6 +13,46 @@ const AuthCallback = () => {
   useEffect(() => {
     const handleAuthCallback = async () => {
       try {
+        // Handle URL hash parameters for auth tokens
+        const hashParams = new URLSearchParams(window.location.hash.substring(1));
+        const accessToken = hashParams.get('access_token');
+        const refreshToken = hashParams.get('refresh_token');
+        
+        if (accessToken && refreshToken) {
+          // Set the session with the tokens from URL
+          const { data, error } = await supabase.auth.setSession({
+            access_token: accessToken,
+            refresh_token: refreshToken
+          });
+          
+          if (error) {
+            console.error('Auth callback error:', error);
+            setStatus('error');
+            setMessage('Hubo un problema al confirmar tu email. Serás redirigido al login.');
+            toast({
+              title: "Error de autenticación",
+              description: "Hubo un problema al confirmar tu email. Inténtalo de nuevo.",
+              variant: "destructive",
+            });
+            setTimeout(() => navigate('/login'), 3000);
+            return;
+          }
+
+          if (data.session) {
+            setStatus('success');
+            setMessage('¡Tu cuenta ha sido verificada exitosamente! Serás redirigido al inicio.');
+            toast({
+              title: "¡Email confirmado!",
+              description: "Tu cuenta ha sido verificada exitosamente.",
+            });
+            // Clean the URL hash
+            window.history.replaceState(null, '', window.location.pathname);
+            setTimeout(() => navigate('/'), 2000);
+            return;
+          }
+        }
+
+        // Fallback to checking existing session
         const { data, error } = await supabase.auth.getSession();
         
         if (error) {

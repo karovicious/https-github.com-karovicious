@@ -8,9 +8,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "@/hooks/use-toast";
 import Logo from "@/components/ui/Logo";
-import {
-  Camera,
-  CheckCircle,
+import { 
   X,
   AlertCircle,
   Users,
@@ -18,11 +16,20 @@ import {
   DollarSign,
   BarChart3,
   LogOut,
-  UserCheck,
-  TrendingUp,
-  Activity,
+  QrCode,
+  CheckCircle,
+  XCircle,
+  Clock,
+  Mail,
+  Phone,
+  MapPin,
   Shield,
+  Activity,
+  TrendingUp,
+  UserCheck,
+  Camera
 } from "lucide-react";
+import AdminCalendar from "@/components/ui/AdminCalendar";
 import type { User } from "@supabase/supabase-js";
 
 interface Reservation {
@@ -446,7 +453,7 @@ const Admin = () => {
 
         {/* Main Content Tabs */}
         <Tabs defaultValue="users" className="space-y-6">
-          <TabsList className="grid w-full grid-cols-4 bg-slate-800/50">
+          <TabsList className="grid w-full grid-cols-5 bg-slate-800/50">
             <TabsTrigger value="users" className="data-[state=active]:bg-primary">
               <Users className="h-4 w-4 mr-2" />
               Usuarios
@@ -455,8 +462,12 @@ const Admin = () => {
               <Calendar className="h-4 w-4 mr-2" />
               Reservaciones
             </TabsTrigger>
+            <TabsTrigger value="calendar" className="data-[state=active]:bg-primary">
+              <Calendar className="h-4 w-4 mr-2" />
+              Calendario
+            </TabsTrigger>
             <TabsTrigger value="scanner" className="data-[state=active]:bg-primary">
-              <Camera className="h-4 w-4 mr-2" />
+              <QrCode className="h-4 w-4 mr-2" />
               Escáner QR
             </TabsTrigger>
             <TabsTrigger value="stats" className="data-[state=active]:bg-primary">
@@ -656,6 +667,11 @@ const Admin = () => {
                 </CardContent>
               </Card>
             </div>
+          </TabsContent>
+
+          {/* Calendar Tab */}
+          <TabsContent value="calendar" className="space-y-4">
+            <AdminCalendar userId={user?.id || ''} />
           </TabsContent>
 
           {/* Statistics Tab */}

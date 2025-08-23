@@ -27,6 +27,7 @@ import {
   ExternalLink,
   MessageCircle
 } from "lucide-react";
+import EventCalendar from "@/components/ui/EventCalendar";
 import type { User, Session } from "@supabase/supabase-js";
 import Logo from "@/components/ui/Logo";
 
@@ -796,6 +797,13 @@ const Index = () => {
             </CardContent>
           </Card>
         </section>
+
+        {/* Calendar Section - Only show if user is logged in */}
+        {user && (
+          <section className="mb-8 sm:mb-16 px-4">
+            <EventCalendar userId={user.id} />
+          </section>
+        )}
 
         {/* Contact Info */}
         <section className="text-center mb-8 sm:mb-16 px-4 bg-gradient-to-br from-purple-900/60 to-rose-900/60 backdrop-blur-sm p-6 rounded-lg shadow-xl border border-rose-400/30">
